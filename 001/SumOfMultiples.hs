@@ -6,11 +6,14 @@ module SumOfMultiples where
 --Prelude> floor $ x+y-z
 --234168
 
-sumUntil :: Fractional a => a -> a
+--sumUntil :: (Integral a, Fractional b) => a -> b
 sumUntil n = n*(n+1)/2
 
---sumUntilStep :: (Num a, Fractional b) => a -> a -> b
-sumUntilStep n x = sumUntil  (floor (n/x)) 
+--sumUntilStep :: (RealFrac b, RealFrac a) => a -> a -> b
+sumUntilStep n x = sumUntil $ floorOfRatio n x
+
+floorOfRatio :: (Integral b, RealFrac a) => a -> a -> b
+floorOfRatio n x = floor $ n/x
 
 --function for generating a list of multiples of a number n
 multiples :: Integral a => a -> [a]
