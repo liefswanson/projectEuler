@@ -4,24 +4,24 @@ from sys import argv
 class Prime(object):
     
     #constructor
-    def __init__(self, step):
-        self.step = step
-        self.untilNextStep = step + 2
+    def __init__(self, value):
+        self.value = value
+        self.distanceToNextMultiple = value
         
     #tostring
     def __str__(self):
-        return str(self.step)
+        return str(self.value)
         
     #used to generate the next piece of the prime's generating function
     def generate(self, iterations=1):
-        self.untilNextStep -= iterations
+        self.distanceToNextMultiple -= iterations
 
-        if self.untilNextStep <= 0:
-            self.untilNextStep += self.step
+        if self.distanceToNextMultiple <= 0:
+            self.distanceToNextMultiple += self.value
             
     #check the value at the current part of the prime's generating function
     def checkPrimality(self):
-        if self.untilNextStep == self.step:
+        if self.distanceToNextMultiple == self.value:
             return False
         else:
             return True
@@ -39,11 +39,14 @@ def genPrimes( length ):
     print (3)
     print (5)
 
-    #Set the step of prime(3) manually, before starting the loop.
-    #Currently it is set to act as if the next number being checked is 4
-    activePrimes[0].untilNextStep = 1
+    #run generate manualy on Prime(3) because we added 5 manually
+    #without this, the generating function for 3 would be off by one run of the main loop below
+    activePrimes[0].generate()
+    
     #this loop skips all even numbers
     #removing the need to check against 2
+
+    #7 is the next odd number after 5 which is the last prime added to our known primes (one i added manually)
     n=7
     #running tally of the length
     runningLength = 3
@@ -52,12 +55,6 @@ def genPrimes( length ):
     while runningLength != length:
         #give an initial optimistic value for the primality of the number we are looping at
         isPrime = True
-
-        #check the value of the first prime in inactive primes
-        #determine if it needs to be added to active primes
-        #is it the square root of n?
-        if inactivePrimes[0].step**2 == n:
-            activePrimes.append( inactivePrimes.pop(0) )
 
         #debughead(n)
 
@@ -70,6 +67,15 @@ def genPrimes( length ):
             #debugbody(isPrime)
 
         #debugtail()
+        
+        #check the value of the first prime in inactive primes
+        #determine if it needs to be added to active primes
+        #is it the square root of n?
+        if inactivePrimes[0].value**2 == n:
+            activePrimes.append( inactivePrimes.pop(0) )
+            #adding a new prime in this way means sqrt(n) is the value added
+            #thus it is not prime
+            isPrime=False
 
         #if the result of the logical and was "True" the number being queried was prime
         if isPrime:
@@ -105,4 +111,7 @@ script, length = argv
 
 length = int(length)
 
-genPrimes(length)
+if length < 3:
+    print("Please choose a higher number of primes to find, we need to find 2,3 and 5 just to start generating primes.")
+else:
+    genPrimes(length)
