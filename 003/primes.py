@@ -39,10 +39,7 @@ def genPrimes( length ):
     print (3)
     print (5)
 
-    #run generate manualy on Prime(3) because we added 5 manually
-    #without this, the generating function for 3 would be off by one run of the main loop below
-    activePrimes[0].generate()
-    
+
     #this loop skips all even numbers
     #removing the need to check against 2
 
@@ -52,7 +49,11 @@ def genPrimes( length ):
     runningLength = 3
     #skip size between primality checks on n
     iterationSize = 2
-    while runningLength != length:
+    #run generate manualy on Prime(3) because we added 5 manually
+    #without this, the generating function for 3 would be off by one run of the main loop below
+    activePrimes[0].generate(2)
+    
+    while runningLength < length:
         #give an initial optimistic value for the primality of the number we are looping at
         isPrime = True
 
