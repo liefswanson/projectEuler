@@ -27,7 +27,7 @@ class Prime(object):
             return True
 
 #generates a list of primes of size "length"
-def genPrimes( length ):
+def genPrimes( cap ):
     #initialize arrays for both the primes up to sqrtn and after sqrtn
     activePrimes = []
     inactivePrimes = []
@@ -45,15 +45,13 @@ def genPrimes( length ):
 
     #7 is the next odd number after 5 which is the last prime added to our known primes (one i added manually)
     n=7
-    #running tally of the length
-    runningLength = 3
     #skip size between primality checks on n
     iterationSize = 2
     #run generate manualy on Prime(3) because we added 5 manually
     #without this, the generating function for 3 would be off by one run of the main loop below
     activePrimes[0].generate(2)
     
-    while runningLength < length:
+    while n < cap:
         #give an initial optimistic value for the primality of the number we are looping at
         isPrime = True
 
@@ -84,9 +82,13 @@ def genPrimes( length ):
             inactivePrimes.append( Prime(n) )
             #make sure to output the newly found prime to the console
             print(n)
-            runningLength+=1
 
         n += iterationSize
+
+    return [Prime(2)] + activePrimes + inactivePrimes
+
+def primeFactoring (n):
+    
 
 
 #set of debugging functions used to visualize what is happening with the generating functions
@@ -108,11 +110,8 @@ def debugtail():
 
 
 #execution of the script starts here!
-script, length = argv
+script, cap = argv
 
-length = int(length)
+cap = int(cap)
 
-if length < 3:
-    print("Please choose a higher number of primes to find, we need to find 2,3 and 5 just to start generating primes.")
-else:
-    genPrimes(length)
+smallestFactor( cap, genPrimes(cap/2) )
