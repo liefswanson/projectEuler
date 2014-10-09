@@ -1,3 +1,4 @@
+{-# LANGUAGE ViewPatterns #-}
 module SumOfMultiples where
 --expected answer
 --Prelude> let x = 333*334/2 * 3
@@ -6,28 +7,27 @@ module SumOfMultiples where
 --Prelude> floor $ x+y-z
 --234168
 
---sumUntil :: (Integral a, Fractional b) => a -> b
-sumUntil n = n*(n+1)/2
+sigma :: (Integral a) => a -> a
+sigma (fromIntegral -> n) = floor $ n*(n+1)/2
+          
+sigma' :: (Integral a) => a -> a
+sigma' n = sum [1..n]
 
---sumUntilStep :: (RealFrac b, RealFrac a) => a -> a -> b
-sumUntilStep n x = sumUntil $ floorOfRatio n x
-
-floorOfRatio :: (Integral b, RealFrac a) => a -> a -> b
-floorOfRatio n x = floor $ n/x
-
---function for generating a list of multiples of a number n
-multiples :: Integral a => a -> [a]
-multiples n = [x | x <- [n,n*2..]]
+sigmaWithStep :: (Integral a) => a -> a -> a 
+sigmaWithStep (fromIntegral -> n) (fromIntegral -> step)
+  = floor step * (sigma $ floor $ n/step)
 
 multiplesUntil :: Integral a => a -> a -> [a]
-multiplesUntil n m = [x | x <- [n,n*2..m-1]]
+multiplesUntil step bound = [x | x <- [step,step*2..bound-1]]
 
---combine lists of multiples of 3 and 5, then subtract list of multiples of 15
-
+solution1 :: Integral a => a -> a -> a -> a 
 solution1 n m x = sum (multiplesUntil n x) + sum (multiplesUntil m x) - sum (multiplesUntil (n*m) x)
 
 solution2 :: (Integral a) => a -> a -> a -> a
 solution2 n m x = sum [i | i <- [1..x-1], mod i n == 0 || mod i m == 0]
 
---solution3 :: (RealFrac b) => b -> b -> b -> b
---solution3 n m x = (sumUntilStep n x) + (sumUntilStep m x) - (sumUntilStep (n*m) x)
+solution3 :: (Integral a) => a -> a -> a -> a
+solution3 cap first second =
+  sigmaWithStep cap first
+  + sigmaWithStep cap second
+  - sigmaWithStep cap (first * second) 
