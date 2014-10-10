@@ -1,4 +1,3 @@
-from sys import argv
 import math
 
 #object used to contain a prime number
@@ -60,23 +59,4 @@ def primeFactorization(num):
                 return n
     return num
 
-script, num = argv
 
-num = int(num)
-
-factors = []
-
-while True:
-    factors.append(int (primeFactorization(num)))
-    print(factors[-1])
-    num = int(num/factors[-1])
-    if num == 1:
-        break
-#while True:
-#    factor = primeFactorization(num)
-#    factors.append(factor)
-#    num = int(num/factor)
-#    print (factor)
-#    
-#    if num == 1:
-#        break
