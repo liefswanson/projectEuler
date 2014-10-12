@@ -1,5 +1,5 @@
-module SmallestMultiple where
-
+main :: IO ()
+main = print expectedValue
 -- This was found by taking the prime factors of every numbre from [1..20]
 -- then taking the union of the sets with only as many repetitions as required to make each non-prime
 expectedValue :: Integer

@@ -1,17 +1,14 @@
 from sys import argv
 from primeFactoring import primeFactorization
+from merge import dumbMergeMax
 
 script, num = argv
 
 num = int(num)
 
-def mergeMax (left, right):
-    l = 0
-    r = 0
-    while l < (len(left) or r < len(right)):
-        
-        
-for i in range (2 to num+1):
+mergedFactors = []
+
+for i in range (2, num+1):
     remainsToFactor = i
     factors = []
 
@@ -23,4 +20,11 @@ for i in range (2 to num+1):
         if remainsToFactor == 1:
             break
 
-            
+    mergedFactors = dumbMergeMax(mergedFactors, factors)
+
+solution = 1
+for factor in mergedFactors:
+    solution *= factor
+    print(factor)
+
+print("The smallest product of the numbers 1 to " + str(num) + " is " + str(solution))
