@@ -25,6 +25,7 @@ for i in range (2, num+1):
 solution = 1
 for factor in mergedFactors:
     solution *= factor
-    print(factor)
+    #print(factor)
 
-print("The smallest product of the numbers 1 to " + str(num) + " is " + str(solution))
+#print("The smallest product of the numbers 1 to " + str(num) + " is " + str(solution))
+print(solution)

@@ -51,7 +51,8 @@ def genPrimes( cap ):
     #without this, the generating function for 3 would be off by one run of the main loop below
     activePrimes[0].generate(2)
     
-    while n < cap:
+    i = 3
+    while i < cap:
         #give an initial optimistic value for the primality of the number we are looping at
         isPrime = True
 
@@ -82,14 +83,12 @@ def genPrimes( cap ):
             inactivePrimes.append( Prime(n) )
             #make sure to output the newly found prime to the console
             print(n)
+            i+=1
 
-        n += iterationSize
+            
+        n+=iterationSize
 
     return [Prime(2)] + activePrimes + inactivePrimes
-
-def primeFactoring (n):
-    
-
 
 #set of debugging functions used to visualize what is happening with the generating functions
 #at the current value of n
@@ -109,9 +108,3 @@ def debugtail():
     print("")
 
 
-#execution of the script starts here!
-script, cap = argv
-
-cap = int(cap)
-
-smallestFactor( cap, genPrimes(cap/2) )
