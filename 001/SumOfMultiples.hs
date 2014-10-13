@@ -7,26 +7,26 @@ module SumOfMultiples where
 --Prelude> floor $ x+y-z
 --234168
 
-sigma :: (Integral a) => a -> a
+sigma :: Integer -> Integer
 sigma (fromIntegral -> n) = floor $ n*(n+1)/2
           
-sigma' :: (Integral a) => a -> a
+sigma' :: Integer -> Integer
 sigma' n = sum [1..n]
 
-sigmaWithStep :: (Integral a) => a -> a -> a 
+sigmaWithStep :: Integer -> Integer -> Integer
 sigmaWithStep (fromIntegral -> n) (fromIntegral -> step)
-  = floor step * (sigma $ floor $ n/step)
+  = (floor step) * (sigma $ floor $ n/step)
 
-multiplesUntil :: Integral a => a -> a -> [a]
+multiplesUntil ::Integer -> Integer -> [Integer]
 multiplesUntil step bound = [x | x <- [step,step*2..bound-1]]
 
-solution1 :: Integral a => a -> a -> a -> a 
+solution1 :: Integer -> Integer -> Integer -> Integer
 solution1 n m x = sum (multiplesUntil n x) + sum (multiplesUntil m x) - sum (multiplesUntil (n*m) x)
 
-solution2 :: (Integral a) => a -> a -> a -> a
+solution2 :: Integer -> Integer -> Integer -> Integer
 solution2 n m x = sum [i | i <- [1..x-1], mod i n == 0 || mod i m == 0]
 
-solution3 :: (Integral a) => a -> a -> a -> a
+solution3 :: Integer -> Integer -> Integer -> Integer
 solution3 cap first second =
   sigmaWithStep cap first
   + sigmaWithStep cap second
