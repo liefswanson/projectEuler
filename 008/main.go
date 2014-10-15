@@ -23,15 +23,7 @@ func main() {
 
 		composite, product := largestProduct(productLength, numSequence)
 		
-		for key, val := range composite {
-			if key == 0 {
-				fmt.Printf("[%d,", val)
-			} else if key < len(composite) - 1 {
-				fmt.Printf("%d,", val)
-			} else {
-				fmt.Printf("%d]\n",val)
-			}
-		}
+		fmt.Println(composite)
 		fmt.Println(product)
 		
 	} else {
@@ -42,9 +34,9 @@ func main() {
 func largestProduct(productLength int, sequence []int) ([]int,int) {
 	head, tail := 0, productLength
 	max := 0
-	maxSeq := make([]int,0)
-	
-	for tail < len(sequence) {
+	maxSeq := make([]int,0,productLength)
+
+	for tail <= len(sequence) {
 		tempSeq := sequence[head:tail]
 		temp := 1
 		for _, val := range tempSeq {
@@ -57,6 +49,7 @@ func largestProduct(productLength int, sequence []int) ([]int,int) {
 		head++
 		tail++
 	}
+
 	return maxSeq, max
 }
 
