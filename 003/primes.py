@@ -1,5 +1,3 @@
-from sys import argv
-
 #object used to contain a prime number
 class Prime(object):
     
@@ -90,8 +88,46 @@ def genPrimes( cap ):
 
     return [Prime(2)] + activePrimes + inactivePrimes
 
-#set of debugging functions used to visualize what is happening with the generating functions
-#at the current value of n
+
+def genPrimesUntil( cap ):
+    #initialize arrays for both the primes up to sqrtn and after sqrtn
+    activePrimes = []
+    inactivePrimes = []
+    #populate arrays to avoid indexing errors during the main loop
+    activePrimes.append(Prime(3))
+    inactivePrimes.append(Prime(5))
+    #output the first three primes to the console, otherwise output starts at 7
+    print (2)
+    print (3)
+    print (5)
+
+
+    n=7
+    iterationSize = 2
+    activePrimes[0].generate(2)
+    
+    while n < cap:
+        isPrime = True
+
+        #debughead(n)
+        for prime in activePrimes:
+            prime.generate(iterationSize)
+            isPrime = isPrime and prime.checkPrimality()
+            #debugbody(isPrime)
+
+        #debugtail()
+        
+        if inactivePrimes[0].value**2 == n:
+            activePrimes.append( inactivePrimes.pop(0) )
+            isPrime=False
+
+        if isPrime:
+            inactivePrimes.append( Prime(n) )
+            print(n)
+            
+        n+=iterationSize
+
+    return [Prime(2)] + activePrimes + inactivePrimes
 
 #prints the first number and the truth values for 1 and 2
 def debughead(n):
