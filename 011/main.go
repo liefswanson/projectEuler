@@ -32,36 +32,55 @@ However, the number of integers per line MUST be the same, or else the program w
 package main
 
 import (
-	//"fmt"
+	"fmt"
 	"log"
 	"strconv"
 	"os"
 	"io/ioutil"
 	"strings"
+	"sync"
 )
 
-func check(e error) {
-	if e != nil {
-		log.Fatal(e)
-	}
-}
 
 func main() {
-	if len(os.Args) > 2 {
+	if len(os.Args) == 3 {
 		filePath := os.Args[2]
 		productLength, err := strconv.Atoi(os.Args[1])
-		//check(err)
+		if  err != nil || productLength < 1 {
+			log.Fatal("the number of integers in the product must be am integer greater than 0")
+		}
 
 		file, err := ioutil.ReadFile(filePath)
-		check(err)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		unparsed := string(file)
-		grid := parseGrid(unparsed)
+		grid, err := translateGrid(unparsed)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if productLength > len(grid) || productLength > len(grid[0]) {
+			msg := "\n The product was longer than the than one of the dimensions of the grid"
+			msg += fmt.Sprintf("\n grid height   : %d",len(grid))
+			msg += fmt.Sprintf("\n grid width    : %d",len(grid[0]))
+			msg += fmt.Sprintf("\n product length: %d",productLength)
 
-		largestProduct(productLength, grid)
+			log.Fatal(msg)
+		}
+
+		//fmt.Println(grid)
 		
+		maxSeq, max := largestProduct(productLength, grid)
+		fmt.Println("")
+		fmt.Println(maxSeq)
+		fmt.Println(max)
 	} else {
-		log.Fatal("\nMissing arguments: \narg0: length of product \narg1: path to file containing grid of integers")
+		msg := "\n Usage:"
+		msg += "\n arg0: length of product"
+		msg += "\n arg1: path to file containing grid of integers"
+		msg += "\n"
+		log.Fatal(msg)
 	}
 }
 
@@ -74,54 +93,148 @@ func largestProduct(productLength int, grid [][]int) ([]int, int) {
 		maxSeqs[i] = make([]int, productLength)
 	}
 
-	// TODO parrallelizing!
-	// could be at least 4 goroutines
-	
-	maxSeqs[0], maxs[0] = horizontal(productLength, grid)
-	maxSeqs[1], maxs[1] = vertical(productLength, grid)
-	maxSeqs[2], maxs[2] = diagnal(productLength, grid)
-	maxSeqs[3], maxs[3] = reverseDiagnal(productLength, grid)
+	var wg sync.WaitGroup
+	wg.Add(directions)
 
+	go horizontal(&maxSeqs[0], &maxs[0], grid, productLength, &wg)
+	go vertical(&maxSeqs[1], &maxs[1], grid, productLength, &wg)
+	go diagonal(&maxSeqs[2], &maxs[2], grid, productLength, &wg)
+	go reverseDiagonal(&maxSeqs[3], &maxs[3], grid, productLength, &wg)
+	
+	wg.Wait()
+	
 	max := 0
 	maxSeq := make([]int, productLength)
 	for i := range maxs {
+		fmt.Println(maxSeqs[i])
 		if maxs[i] > max {
 			max = maxs[i]
-			maxSeq = maxSeqs[i]
+			copy(maxSeq, maxSeqs[i])
 		}
 	}
 	return maxSeq, max
 }
 
 
-// TODO build algorithms to actually find the products we are looking for
-// change the return statements to not be dummies
-func horizontal(productLength int, grid [][]int) ([]int, int) {
-	return make([]int, productLength), 0
-}
+//DEBUGGING NOTE!
+//---------------
+//len(grid) == # of rows
+//len(grid[0]) == # of columns
 
-func vertical(productLength int, grid [][]int) ([]int, int) {
-	return make([]int, productLength), 0
-}
+func horizontal(maxSeq *[]int, max *int, grid [][]int, productLength int, wg *sync.WaitGroup) {
 
-func diagnal(productLength int, grid [][]int) ([]int, int) {
-	return make([]int, productLength), 0
-}
-
-func reverseDiagnal(productLength int, grid [][]int) ([]int, int) {
-	return make([]int, productLength), 0
-}
-
-func parseGrid(unparsed string) [][]int {
-	lines := strings.Split(unparsed, "\n")
+	for row := range grid {
+		head := 0
+		tail := head + productLength
+		
+		for tail <= len(grid[0]) {
+			tempSeq := grid[row][head:tail]
+			temp := 1
+			
+			for _, val := range tempSeq {
+				temp *= val
+			}
+			if temp > *max {
+				*max = temp
+				copy(*maxSeq, tempSeq)
+			}
+			head++
+			tail++
+		}
+	}
 	
-	parsed := make([][]string, len(lines))
-	for i, line := range lines {
-		parsed[i] = strings.Split(line, " ")
+	wg.Done()
+}
+
+
+func vertical(maxSeq *[]int, max *int, grid [][]int, productLength int, wg *sync.WaitGroup) {
+	
+	for column := range grid[0] {
+		head := 0
+		tail := head + productLength
+		
+		for tail <= len(grid) {
+			tempSeq := make([]int, productLength)
+			temp := 1
+			
+			for offset := range tempSeq {
+				tempSeq[offset] = grid[head+offset][column]
+				temp *= tempSeq[offset]
+			}
+			if temp > *max {
+				*max = temp
+				copy(*maxSeq, tempSeq)
+			}
+			head++
+			tail++
+		}
 	}
 
-	integers := make([][]int, len(lines))
-	for i := range lines {
+	wg.Done()
+}
+
+func diagonal(maxSeq *[]int, max *int, grid [][]int, productLength int, wg *sync.WaitGroup) {
+
+	for column := range grid[0][:len(grid[0])-productLength+1] {
+		row := 0
+		tail := row + productLength
+		
+		for tail <= len(grid) {
+			tempSeq := make([]int, productLength)
+			temp := 1
+			
+			for i := range tempSeq {
+				tempSeq[i] = grid[row + i][column + i]
+				temp *= tempSeq[i]
+			}
+			if temp > *max {
+				*max = temp
+				copy(*maxSeq, tempSeq)
+			}
+			row++
+			tail++
+		}
+	}
+	wg.Done()
+}
+
+func reverseDiagonal(maxSeq *[]int, max *int, grid [][]int, productLength int, wg *sync.WaitGroup) {
+
+	for column := len(grid[0])-1; column >= productLength-1; column-- {
+		row := 0
+		tail := row + productLength
+		for tail <= len(grid){
+			tempSeq := make([]int, productLength)
+			temp := 1
+			
+			for i := range tempSeq {
+				tempSeq[i] = grid[row+i][column-i]
+				temp *= tempSeq[i]
+			}
+			if temp > *max {
+				*max = temp
+				copy(*maxSeq, tempSeq)
+			}
+			row++
+			tail++
+		}
+	}
+	wg.Done()
+}
+
+func translateGrid(unparsed string) ([][]int, error) {
+
+	tempLines := strings.Split(unparsed, "\n")
+	parsed := make([][]string, len(tempLines))
+	for i, line := range tempLines {
+		parsed[i] = strings.Split(line, " ")
+	}
+	tempLines = nil
+	
+	formatErr := validateGridFormatting(parsed)
+	
+	integers := make([][]int, len(parsed))
+	for i := range parsed {
 		integers[i] = make([]int, len(parsed[0]))
 	}
 
@@ -129,11 +242,43 @@ func parseGrid(unparsed string) [][]int {
 		for j := range integers[i] {
 			temp, err := strconv.Atoi(parsed[i][j])
 			integers[i][j] = temp
-			check(err)
+			if err != nil {
+				msg := "\n There is a non integer in the grid"
+				msg += fmt.Sprintf("\n line = %d \n word = %d \n value = \"%s\"", i+1, j+1, parsed[i][j])
+				log.Fatal(msg)
+			}
 		}
-		// debug line which will print the whole grid in the correct shape
-		// fmt.Println(integers[i])
 	}
 
-	return integers
+	return integers, formatErr
+}
+
+func validateGridFormatting(grid [][]string) error {
+	lengths := make([]int, len(grid))
+
+	fail := false
+	var lengthErr error = nil
+
+	for i := range grid {
+		lengths[i] = len(grid[i])
+		if lengths[0] != lengths[i] {
+			fail = true
+		}
+	}
+	
+	if fail {
+		temp := "\n The grid was not properly formatted."
+		temp += "\n Not all lines in the grid contain the same number of integers"
+		temp += "\n or there are too many spaces between some entries"
+		temp += "\n or there are empty lines in the file"
+		temp += "\n"
+		
+		for i, length := range lengths {
+			temp += fmt.Sprintf("line %d : length %d\n", i+1, length)
+		}
+		lengthErr = fmt.Errorf(temp)
+		return lengthErr
+	}
+	
+	return nil
 }

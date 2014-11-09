@@ -50,7 +50,9 @@ func largestProduct(productLength int, sequence []int) ([]int,int) {
 		tail++
 	}
 
-	return maxSeq, max
+	retSeq := make([]int, productLength)
+	copy(retSeq, maxSeq)
+	return retSeq, max
 }
 
 
@@ -59,11 +61,11 @@ func translateSequence(sequence string) []int {
 
 	i := 0
 	for _, runeValue := range sequence {
-		x, err := strconv.Atoi(fmt.Sprintf("%c", runeValue))
+		temp, err := strconv.Atoi(fmt.Sprintf("%c", runeValue))
 		if err != nil {
 			log.Fatal(err)
 		} 
-		result[i] = x
+		result[i] = temp
 		i++
 	}
 	
