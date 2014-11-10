@@ -48,11 +48,24 @@ func factors(n int) int {
 		}
 	}
 
-	if n == int(math.Pow(float64(factors[len(factors)-1]), 2.0)) {
-		count = (len(factors)-1)*2+1
+	middleFactor := factors[len(factors)-1]
+	if n == sqr(middleFactor){
+		count = (len(factors)-1)*2+1 //n is a perfect square
 	} else {
 		count = len(factors)*2
 	}
 	//fmt.Println(factors)
 	return count
+}
+
+func sqr(n int) int {
+	return pow(n,2)
+}
+
+func pow(n,ex int) int {
+	product := 1
+	for i:=0; i < ex; i++ {
+		product*=n
+	}
+	return product
 }
