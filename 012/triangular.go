@@ -59,7 +59,7 @@ func factors(n int) int {
 }
 
 func sqr(n int) int {
-	return pow(n,2)
+	return n*n
 }
 
 func pow(n,ex int) int {
