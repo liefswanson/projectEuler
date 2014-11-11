@@ -24,7 +24,7 @@ func main() {
 		}
 		
 	} else {
-		log.Fatal("\nPlease give an index for the highest traingular number")
+		log.Fatal("\nPlease give the number of factors you are looking for")
 	}
 }
 
