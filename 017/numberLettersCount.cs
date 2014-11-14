@@ -32,13 +32,18 @@ public class EnglishNumber {
 	
 	//eg: of parse technique
 	//3754254582340
-	//[3,754,254,582,340]
-	//[[0,3],[7,54],[2,54],[5,82],[3,40]]
-	//three trillion, seven hundred and fifty-four billion, two hundred and fifty-four million, five hundred and eighty-two thousand, three hundred and forty
+	//[3,754,200,582,340]
+	//[[0,3],[7,54],[2,0],[5,82],[3,40]]
+	//three trillion, seven hundred and fifty-four billion, two hundred million, five hundred and eighty-two thousand, three hundred and forty
 
 	//while temp > 0
 	//append temp % 1000
 	//temp / 1000
+
+	//foreach item
+	//append [current / 100,current % 100]
+
+	//start doing substitutions
 }
 
 public class Program {
@@ -74,10 +79,10 @@ public class Program {
 		char[] delimiters = {'\n'};
 		string[] numbers = text.Split(delimiters);
 
-		for (ulong i = low; i < (ulong)numbers.Length ; i++) {
-			numbers[i] = numbers[i].Replace("-","");
-			// System.Console.WriteLine(numbers[i]);
-		}
-		System.Console.WriteLine("The sum of the lengths of each number from {0} to {1} is {2}",low ,high, tally);
+		// for (ulong i = low; i < (ulong)numbers.Length ; i++) {
+		// 	numbers[i] = numbers[i].Replace("-","");
+		// 	// System.Console.WriteLine(numbers[i]);
+		// }
+		// System.Console.WriteLine("The sum of the lengths of each number from {0} to {1} is {2}",low ,high, tally);
 	}
 }
