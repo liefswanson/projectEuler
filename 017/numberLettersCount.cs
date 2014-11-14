@@ -33,8 +33,8 @@ public class EnglishNumber {
 	//eg: of parse technique
 	//3754254582340
 	//[3,754,254,582,340]
-	//[[3,0],[7,54],[2,54],[5,82],[3,40]]
-	//3 trillion, seven hundred and fifty-four billion, two hundred and fifty-four million, five hundred and eighty-two thousand, three hundred and forty
+	//[[0,3],[7,54],[2,54],[5,82],[3,40]]
+	//three trillion, seven hundred and fifty-four billion, two hundred and fifty-four million, five hundred and eighty-two thousand, three hundred and forty
 
 	//while temp > 0
 	//append temp % 1000
