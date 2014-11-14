@@ -18,32 +18,14 @@
 --URL: https://github.com/liefswanson
 
 import System.Environment
-import Data.List
+
 
 main :: IO()
 main = do
-  args <- getArgs
-  let n = read $ head args :: Int
-  let collatzSeqs = maxCollatzSequences n
-      
-  let len = maximum collatzSeqs
-  let index = head $ elemIndices len collatzSeqs
+  h:w:[] <- getArgs
+  let height = read h ::Integer
+  let width = read w ::Integer
+  putStrLn $ show $ lattice height width
 
-  let val = 2*index+1 -- we only checked odd numbers, so compensate index to appropriate value
-  putStrLn $ show (len,val)
-  putStrLn $ show $ genCollatz val
-
---TODO find some way to reduce the distance to the lower bound of the list from n
-maxCollatzSequences :: Int -> [Int]
-maxCollatzSequences n = map length $ map genCollatz [1,3..n]
-
-genCollatz :: Int -> [Int]
-genCollatz 1 = [1]
-genCollatz n = n : genCollatz (collatz n) 
-
-collatz :: Int -> Int
-collatz n =
-  if even n
-  then div n 2
-  else 3*n+1
-
+lattice :: Integer -> Integer -> Integer
+lattice height width = (product [height+1..height+width]) `div` (product [1..height])

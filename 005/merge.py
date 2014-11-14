@@ -1,31 +1,21 @@
-#not yet functional
-def mergeMax (left, right):
-    result = []
-    l = len(left)
-    r = len(right)
-    while (l > 0 and r) > 0:
-        if left[0] < right[0]:
-            result.append(left.pop(0))
-            l -= 1
-        elif right[0] < left[0]:
-            result.append(right.pop(0))
-            r -= 1
-        else:
-            result.append(left.pop(0))
-            right.pop(0)
-            l -= 1
-            r -= 1
-            
-    while (l < 0):
-        result.append(left.pop(0))
-        l -= 1
-        
-    while (r < 0):
-        result.append(right.pop(0))
-        r -= 1
-        
-    return result
+#Copyright (C) 2014 Lief Swanson
 
+#This program is free software; you can redistribute it and/or modify
+#it under the terms of the GNU General Public License as published by
+#the Free Software Foundation; either version 2 of the License, or
+#(at your option) any later version.
+
+#This program is distributed in the hope that it will be useful,
+#but WITHOUT ANY WARRANTY; without even the implied warranty of
+#MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+#GNU General Public License for more details.
+
+#You should have received a copy of the GNU General Public License
+#along with this program; if not, write to the Free Software
+#Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
+#Author: Lief Swanson
+#URL: https://github.com/liefswanson
 
 def dumbMergeMax (left, right):
     result = []
@@ -43,4 +33,3 @@ def dumbMergeMax (left, right):
         result += ([i] * max(l,r))
     
     return result
-
