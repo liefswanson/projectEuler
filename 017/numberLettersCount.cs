@@ -44,6 +44,49 @@ public class EnglishNumber {
 	//append [current / 100,current % 100]
 
 	//start doing substitutions
+
+	public string english {get; private set;}
+	public ulong value {get; private set;}
+
+	public EnglishNumber(ulong value) {
+		this.value = value;
+		parseValue();
+	}
+
+	//note, both the list of ulongs and array of tuples of ulongs are intentionally backwards
+	private void parseValue() {
+		List<ulong> firstParse = new List<ulong>();
+		ulong temp = value;
+		while (temp > 0) {
+			ulong current = temp % 1000;
+			temp = temp / 1000;
+			firstParse.Add(current);
+		}
+		
+		Tuple<ulong,ulong>[] secondParse = new Tuple<ulong,ulong>[firstParse.Count];
+		for (int i = 0; i < firstParse.Count; i++) {
+			secondParse[i] = new Tuple<ulong,ulong>( firstParse[i]/100, firstParse[i]%100 );
+		}
+		Console.WriteLine(value.ToString());
+		Console.WriteLine("[" + string.Join(", ",firstParse) + "]");
+
+		Console.Write("[");
+		for (int i = secondParse.Length-1; i >= 0; i--) {
+			Console.Write(secondParse[i].ToString());
+			if (i != 0) {
+				Console.Write(", ");
+			}
+		}
+		Console.Write("]\n");
+		string english = makeString(secondParse);
+		//Console.WriteLine(string.Join(",",secondParse));
+	} 
+
+	private String makeString(Tuple<ulong,ulong>[] digits) {
+		string[] temp = new string[digits.Length];
+		//build string here
+	}
+	
 }
 
 public class Program {
@@ -52,7 +95,7 @@ public class Program {
 
 		if (args.Length < 1) {
 			
-			System.Console.WriteLine("please specify a number to go up to.");
+			Console.WriteLine("please specify a number to go up to.");
 			return;
 		}
 		
@@ -62,10 +105,10 @@ public class Program {
 
 			if (args.Length == 1) {
 				low = 1;
-				high = System.Convert.ToUInt64(args[0]);
+				high = Convert.ToUInt64(args[0]);
 			} else {
-				low = System.Convert.ToUInt64(args[0]);
-				high = System.Convert.ToUInt64(args[1]);
+				low = Convert.ToUInt64(args[0]);
+				high = Convert.ToUInt64(args[1]);
 			}
 			
 		} catch(Exception ex) {
@@ -79,10 +122,10 @@ public class Program {
 		char[] delimiters = {'\n'};
 		string[] numbers = text.Split(delimiters);
 
-		// for (ulong i = low; i < (ulong)numbers.Length ; i++) {
-		// 	numbers[i] = numbers[i].Replace("-","");
-		// 	// System.Console.WriteLine(numbers[i]);
-		// }
+		EnglishNumber temp;
+		for (ulong i = low; i < 100000000 ; i++) {
+			temp = new EnglishNumber(i);
+		}
 		// System.Console.WriteLine("The sum of the lengths of each number from {0} to {1} is {2}",low ,high, tally);
 	}
 }
