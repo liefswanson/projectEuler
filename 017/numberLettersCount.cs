@@ -33,7 +33,6 @@ public class EnglishNumber {
 	//eg: of parse technique
 	//3754254582340
 	//[3,754,200,582,340]
-	//[[0,3],[7,54],[2,0],[5,82],[3,40]]
 	//three trillion, seven hundred and fifty-four billion, two hundred million, five hundred and eighty-two thousand, three hundred and forty
 
 	//while temp > 0
@@ -48,45 +47,89 @@ public class EnglishNumber {
 	public string english {get; private set;}
 	public ulong value {get; private set;}
 
+	static private string[] numbers = null;
+	static private string[] quantifiers = null;
+
 	public EnglishNumber(ulong value) {
 		this.value = value;
-		parseValue();
+		this.makeString(this.parseValue());
 	}
 
-	//note, both the list of ulongs and array of tuples of ulongs are intentionally backwards
-	private void parseValue() {
-		List<ulong> firstParse = new List<ulong>();
+	public static void initializeInternalsFromFiles(string numsFile, string quantsFile) {
+		//TODO check for errors in the file read, it might be missing!
+		//It may also have less than the number of lines it needs!
+		char[] delimiters = {'\n'};
+
+		string text = System.IO.File.ReadAllText(numsFile);
+		EnglishNumber.numbers = text.Split(delimiters);
+
+		//Console.Write(string.Join("\n",EnglishNumber.numbers));
+
+
+		text = System.IO.File.ReadAllText(quantsFile);
+		EnglishNumber.quantifiers = text.Split(delimiters);
+
+		//Console.Write(string.Join("\n",EnglishNumber.quantifiers));
+
+	}
+	
+	//note, the list of ushorts is intentionally backward
+	private List<ushort> parseValue() {
+		List<ushort> firstParse = new List<ushort>();
 		ulong temp = value;
 		while (temp > 0) {
-			ulong current = temp % 1000;
+			ushort current = (ushort)(temp % 1000);
 			temp = temp / 1000;
 			firstParse.Add(current);
 		}
 		
-		Tuple<ulong,ulong>[] secondParse = new Tuple<ulong,ulong>[firstParse.Count];
-		for (int i = 0; i < firstParse.Count; i++) {
-			secondParse[i] = new Tuple<ulong,ulong>( firstParse[i]/100, firstParse[i]%100 );
-		}
-		Console.WriteLine(value.ToString());
-		Console.WriteLine("[" + string.Join(", ",firstParse) + "]");
+		//Console.WriteLine(value.ToString());
+		//Console.WriteLine("[" + string.Join(", ",firstParse) + "]");
 
-		Console.Write("[");
-		for (int i = secondParse.Length-1; i >= 0; i--) {
-			Console.Write(secondParse[i].ToString());
-			if (i != 0) {
-				Console.Write(", ");
-			}
-		}
-		Console.Write("]\n");
-		string english = makeString(secondParse);
-		//Console.WriteLine(string.Join(",",secondParse));
+		return firstParse;
 	} 
 
-	private String makeString(Tuple<ulong,ulong>[] digits) {
-		string[] temp = new string[digits.Length];
+	private void makeString(List<ushort> parsed) {
+		string[] temp = new string[parsed.Count];
 		//build string here
+
+		int j = 0;
+		for (int i = parsed.Count-1; i >= 0; i--) {
+			ushort hundreds = (ushort)(parsed[i] / 100);
+			ushort remaining = (ushort)(parsed[i] % 100);
+
+			switch (hundreds) {
+			case 0:
+				break;
+			default:
+				temp[j] += numbers[hundreds] + " Hundred ";
+				break;
+			}
+
+			switch (remaining) {
+			case 0:
+				break;
+			default:
+				if (hundreds != 0) {
+					temp[j] += "and ";
+				}
+					
+				temp[j] += numbers[remaining];
+				break;
+			}
+
+			if (hundreds != 0 || remaining != 0) {
+				temp[j] += " " + quantifiers[i]; //quantifiers are organized as 1000^i
+			}
+			j++;
+		}
+		this.english = String.Join(" ",temp); 
 	}
-	
+
+	public override string ToString() {
+		return english;
+	}
+		
 }
 
 public class Program {
@@ -118,14 +161,17 @@ public class Program {
 
 		}
 		
-		string text = System.IO.File.ReadAllText("numbers");
-		char[] delimiters = {'\n'};
-		string[] numbers = text.Split(delimiters);
+		EnglishNumber.initializeInternalsFromFiles("numbers", "quantifiers");
+		
 
+		ulong tally = 0;
 		EnglishNumber temp;
-		for (ulong i = low; i < 100000000 ; i++) {
+		for (ulong i = low; i <= high ; i++) {
 			temp = new EnglishNumber(i);
+			//Console.WriteLine(i);
+			Console.WriteLine(temp);
+			tally += (ulong)temp.english.Replace(" ", "").Replace("-", "").Length;
 		}
-		// System.Console.WriteLine("The sum of the lengths of each number from {0} to {1} is {2}",low ,high, tally);
+		System.Console.WriteLine("The sum of the lengths of all numbers in english from {0} to {1} is {2}",low ,high, tally);
 	}
 }
