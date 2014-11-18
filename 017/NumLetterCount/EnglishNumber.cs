@@ -39,39 +39,19 @@
 using System;
 using System.Collections.Generic;
 
-namespace EnglishNumber {
+namespace EulerSeventeen {
 
 	public class EnglishNumber {
 	
 		public string english {get; private set;}
 		public ulong value {get; private set;}
 
-		static private string[] numbers = null;
-		static private string[] quantifiers = null;
-
 		public EnglishNumber(ulong value) {
 			this.value = value;
-			this.makeString(this.parseValue());
+		    var temp = this.parseValue();
+			this.makeString(temp);
 		}
 
-		public static void initializeInternalsFromFiles(string numsFile, string quantsFile) {
-			//TODO check for errors in the file read, it might be missing!
-			//It may also have less than the number of lines it needs!
-			char[] delimiters = {'\n'};
-
-			string text = System.IO.File.ReadAllText(numsFile);
-			EnglishNumber.numbers = text.Split(delimiters);
-
-			//Console.Write(string.Join("\n",EnglishNumber.numbers));
-
-
-			text = System.IO.File.ReadAllText(quantsFile);
-			EnglishNumber.quantifiers = text.Split(delimiters);
-
-			//Console.Write(string.Join("\n",EnglishNumber.quantifiers));
-
-		}
-	
 		//note, the list of ushorts is intentionally backward
 		private List<ushort> parseValue() {
 			List<ushort> parse = new List<ushort>();
@@ -80,6 +60,7 @@ namespace EnglishNumber {
 				ushort current = (ushort)(temp % 1000);
 				temp = temp / 1000;
 				parse.Add(current);
+
 			}
 		
 			//Console.WriteLine(value.ToString());
@@ -129,6 +110,121 @@ namespace EnglishNumber {
 		public override string ToString() {
 			return english;
 		}
-		
+
+
+		static readonly public string[] numbers =
+		{
+			"zero",
+			"one",
+			"two",
+			"three",
+			"four",
+			"five",
+			"six",
+			"seven",
+			"eight",
+			"nine",
+			"ten",
+			"eleven",
+			"twelve",
+			"thirteen",
+			"fourteen",
+			"fifteen",
+			"sixteen",
+			"seventeen",
+			"eighteen",
+			"nineteen",
+			"twenty",
+			"twenty-one",
+			"twenty-two",
+			"twenty-three",
+			"twenty-four",
+			"twenty-five",
+			"twenty-six",
+			"twenty-seven",
+			"twenty-eight",
+			"twenty-nine",
+			"thirty",
+			"thirty-one",
+			"thirty-two",
+			"thirty-three",
+			"thirty-four",
+			"thirty-five",
+			"thirty-six",
+			"thirty-seven",
+			"thirty-eight",
+			"thirty-nine",
+			"forty",
+			"forty-one",
+			"forty-two",
+			"forty-three",
+			"forty-four",
+			"forty-five",
+			"forty-six",
+			"forty-seven",
+			"forty-eight",
+			"forty-nine",
+			"fifty",
+			"fifty-one",
+			"fifty-two",
+			"fifty-three",
+			"fifty-four",
+			"fifty-five",
+			"fifty-six",
+			"fifty-seven",
+			"fifty-eight",
+			"fifty-nine",
+			"sixty",
+			"sixty-one",
+			"sixty-two",
+			"sixty-three",
+			"sixty-four",
+			"sixty-five",
+			"sixty-six",
+			"sixty-seven",
+			"sixty-eight",
+			"sixty-nine",
+			"seventy",
+			"seventy-one",
+			"seventy-two",
+			"seventy-three",
+			"seventy-four",
+			"seventy-five",
+			"seventy-six",
+			"seventy-seven",
+			"seventy-eight",
+			"seventy-nine",
+			"eighty",
+			"eighty-one",
+			"eighty-two",
+			"eighty-three",
+			"eighty-four",
+			"eighty-five",
+			"eighty-six",
+			"eighty-seven",
+			"eighty-eight",
+			"eighty-nine",
+			"ninety",
+			"ninety-one",
+			"ninety-two",
+			"ninety-three",
+			"ninety-four",
+			"ninety-five",
+			"ninety-six",
+			"ninety-seven",
+			"ninety-eight",
+			"ninety-nine"
+		};
+
+		static readonly public string[] quantifiers =
+		{
+			"",
+			"Thousand",
+			"Million",
+			"Billion",
+			"Trillion",
+			"Quadrillion",
+			"Quintillion"
+		};
 	}
 }

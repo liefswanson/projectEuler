@@ -18,10 +18,9 @@
 //URL: https://github.com/liefswanson
 
 using System;
-using System.Collections.Generic;
-using EnglishNumber;
+using EulerSeventeen;
 
-public class NumberLettersCount {
+public class MainProgram {
 
 	public static void Main(string[] args) {
 
@@ -50,16 +49,15 @@ public class NumberLettersCount {
 
 		}
 		
-		EnglishNumber.initializeInternalsFromFiles("numbers", "quantifiers");
-		
-
 		ulong tally = 0;
 		EnglishNumber current;
+		string temp;
 		for (ulong i = low; i <= high; i++) {
 			current = new EnglishNumber(i);
 			//Console.WriteLine(i);
 			Console.WriteLine(current);
-			tally += (ulong)current.english.Replace(" ", "").Replace("-", "").Length;
+			temp = current.english.Replace(" ", "").Replace("-", "");
+			tally += (ulong)temp.Length;
 		}
 		System.Console.WriteLine("The sum of the lengths of all numbers in english from {0} to {1} is {2}",low ,high, tally);
 	}
