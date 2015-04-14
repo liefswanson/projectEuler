@@ -10,11 +10,6 @@ class Node {
 		this.value = value; 
 	}
 
-	public void
-	AddAdjacent(Node*[] adjacent) {
-		this.adjacent ~= adjacent;
-	}
-
 	public override
 	string toString(){
 		return to!(string)(value);

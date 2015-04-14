@@ -1,8 +1,9 @@
 {
 	"name": "astar.app",
-	"description": "A minimal D application.",
+	"description": "Using A* to solve project Euler 18 and 67.",
 	"copyright": "Copyright © 2015, lief Swanson",
 	"authors": ["lief Swanson"],
+	"mainSourceFile" : "source/astar/app.d",
 	"dependencies": {
 	}
 }

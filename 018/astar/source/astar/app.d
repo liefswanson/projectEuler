@@ -19,7 +19,7 @@ main(string[] args) {
 	try {
 		f = readText(args[1]);
 	} catch {
-		writeln("There was a problem reading \"" ~ args[1] ~ "\", is the path correct?");
+		writeln("There was a problem reading \"", args[1], "\", is the path correct?");
 		exit(1);
 	}
 
@@ -41,7 +41,6 @@ main(string[] args) {
 		}
 	}
 
-	// writeln(nums);
 	foreach(line; nums) {
 		int largest = 0;
 		foreach(num; line) {
@@ -50,7 +49,6 @@ main(string[] args) {
 		heuristics ~= largest;
 	}
 
-	// writeln(heuristics);
 	foreach(num; heuristics) {
 		maximum = max(num, maximum);
 	}
@@ -64,13 +62,14 @@ main(string[] args) {
 		}
 	}
 
+	// also compliment the heuristics
 	foreach(ref num; heuristics) {
 		num = maximum - num;
 	}
 	
-	// writeln(maximum);
-	// writeln(nums);
-	// writeln(heuristics);
-	Graph g = new Graph(nums);
+	Graph g = new Graph(nums, heuristics);
 	writeln(g);
+	writeln(*g.start);
+	writeln(*g.goal);
+
 }
