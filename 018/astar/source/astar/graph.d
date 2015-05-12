@@ -6,12 +6,12 @@ import node;
 
 class Graph {
 	public Node[][] nodes;
-	public Node*     goal;
+	public Node*    goal;
 	public Node*    start;
 	
-	// it should be noted that concatenation is probably very slow
-	public this (const ref int[][] values,
-				 const ref int[]   heuristic) {
+	public
+	this (const ref int[][] values,
+		  const ref int[]   heuristic) {
 		buildNodes(values);
 		setHeuristics(heuristic);
 		
@@ -22,6 +22,7 @@ class Graph {
 		buildLinks();
 	}
 
+	// it should be noted that concatenation is probably very slow
 	private
 	void buildNodes(const ref int[][] values) {
 		nodes = [];
@@ -57,6 +58,11 @@ class Graph {
 				node.heuristic = heuristics[i];
 			}
 		}
+	}
+
+	public
+	Node[] Astar() {
+		
 	}
 
 	public override
