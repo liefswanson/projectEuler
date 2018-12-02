@@ -1,6 +1,10 @@
 projectEuler
 ============
 
+To see my old solutions, go to the "old" branch. I am working on teaching myself Haskell by doing every problem from scratch 
+on the master branch.
+
+
 my solutions to project Euler problems
 
 
