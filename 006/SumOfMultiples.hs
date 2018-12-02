@@ -1,1 +1,0 @@
-../001/SumOfMultiples.hs
