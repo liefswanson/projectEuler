@@ -26,89 +26,99 @@ library:
   source-dirs: src
 
 executables:
-  q1:
-    main:                Main.hs
-    source-dirs:         app/q1
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q1:
+  #   main:                Main.hs
+  #   source-dirs:         app/q1
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q2:
-    main:                Main.hs
-    source-dirs:         app/q2
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q2:
+  #   main:                Main.hs
+  #   source-dirs:         app/q2
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q3:
-    main:                Main.hs
-    source-dirs:         app/q3
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q3:
+  #   main:                Main.hs
+  #   source-dirs:         app/q3
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q4:
-    main:                Main.hs
-    source-dirs:         app/q4
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q4:
+  #   main:                Main.hs
+  #   source-dirs:         app/q4
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q5:
-    main:                Main.hs
-    source-dirs:         app/q5
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q5:
+  #   main:                Main.hs
+  #   source-dirs:         app/q5
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q6:
-    main:                Main.hs
-    source-dirs:         app/q6
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q6:
+  #   main:                Main.hs
+  #   source-dirs:         app/q6
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q7:
-    main:                Main.hs
-    source-dirs:         app/q7
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q7:
+  #   main:                Main.hs
+  #   source-dirs:         app/q7
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q8:
-    main:                Main.hs
-    source-dirs:         app/q8
-    ghc-options:
-    - -threaded
-    - -rtsopts
-    - -with-rtsopts=-N
-    dependencies:
-    - projectEuler
+  # q8:
+  #   main:                Main.hs
+  #   source-dirs:         app/q8
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
 
-  q9:
+  # q9:
+  #   main:                Main.hs
+  #   source-dirs:         app/q9
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  q10:
     main:                Main.hs
-    source-dirs:         app/q9
+    source-dirs:         app/q10
     ghc-options:
     - -threaded
     - -rtsopts

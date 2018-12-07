@@ -22,6 +22,7 @@ main =
                  "answer: " ++ answer ++ "\n"
 
 
+-- brute force, unused
 slowTriples n = [[x,y,z] | x <- [1..n],
                            y <- [1..n],
                            z <- [1..n],
