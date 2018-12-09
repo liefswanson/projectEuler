@@ -3,6 +3,7 @@ module Counting (
     choose,
     sumToN,
     fibonacciSequence,
+    triangleSequence
 ) where
 
 factorial :: (Integral a)  => a -> a
@@ -21,3 +22,14 @@ sumToN n = n*(n+1) `div` 2
 
 fibonacciSequence :: [Integer]
 fibonacciSequence = 0:1:zipWith (+) fibonacciSequence (tail fibonacciSequence)
+
+triangleSequence :: [Integer]
+triangleSequence = triangleSequenceHelper 0 1
+
+triangleSequenceHelper :: Integer -> Integer -> [Integer]
+triangleSequenceHelper count idx =
+    let
+        count' = count + idx
+        idx' = idx + 1
+    in
+        count':triangleSequenceHelper count' idx'

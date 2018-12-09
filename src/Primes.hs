@@ -5,9 +5,10 @@ module Primes (
     divides,
     mergeFactorLists,
     multiplyFactorList,
+    countDivisors,
 ) where
 
-import Util (none)
+import Util (none, runLength)
 
 divides :: Integral a => a -> a -> Bool
 divides a b = b `mod` a == 0
@@ -27,20 +28,17 @@ primeFactors :: Integer -> [Integer]
 primeFactors n
     | n == 0 = []
     | n < 0  = -1:primeFactors(-n)
-    | otherwise =
-        let
-            primes = takeWhile (<= n) primeSequence
-        in
-            primeFactorsHelper primes n
+    | otherwise = primeFactorsHelper [2..] n
+
 
 primeFactorsHelper :: [Integer] -> Integer -> [Integer]
 primeFactorsHelper _ 1 = []
-primeFactorsHelper primes n =
+primeFactorsHelper candidates n =
     let
-        divisor   = head.take 1 $ filter (`divides` n) primes
+        divisor   = head $ filter (`divides` n) candidates
         remaining = n `div` divisor
     in
-        divisor : primeFactorsHelper primes remaining
+        divisor : primeFactorsHelper [divisor..] remaining
 
 mergeFactorLists :: [(Integer, Int)] -> [(Integer, Int)] -> [(Integer,Int)]
 mergeFactorLists as [] = as
@@ -56,3 +54,12 @@ multiplyFactorList items =
         accumulator tally (base,exp) = tally * base^exp
     in
         foldl accumulator 1 items
+
+countDivisors :: Integer -> Integer
+countDivisors n =
+    let
+        factorize = runLength.primeFactors
+        exps = map snd $ factorize n
+        choices = map (+1) exps
+    in
+        product $ map fromIntegral choices

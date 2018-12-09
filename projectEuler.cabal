@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: c10ed81e239a1a9e81a3a39251da6548c8065a7f29a095500d53b9e2aca740da
+-- hash: ab67c3ccd6fcb68f13a2dd94ae1874e733301eccfa471a0f9164e376c74a242e
 
 name:           projectEuler
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Collatz
       Counting
       Primes
       Pythagoras
@@ -39,12 +40,12 @@ library
       base >=4.7 && <5
   default-language: Haskell2010
 
-executable q10
+executable q16
   main-is: Main.hs
   other-modules:
       Paths_projectEuler
   hs-source-dirs:
-      app/q10
+      app/q16
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5

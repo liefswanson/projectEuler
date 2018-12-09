@@ -1,9 +1,13 @@
 module Util (
     palindrome,
     runLength,
-    none
+    none,
+    greatest,
+    takeWhileInclude
 ) where
 
+greatest :: Ord a => [a] -> a
+greatest (x:items) = foldl max x items
 
 none :: (a -> Bool) -> [a] -> Bool
 none fn = not.(any fn)
@@ -19,3 +23,10 @@ runLength (x:xs) =
         count = length match + 1
     in
         (x, count) : runLength remaining
+
+takeWhileInclude :: (a -> Bool) -> [a] -> [a]
+takeWhileInclude fn [] = []
+takeWhileInclude fn (x:items) =
+    if fn x
+        then x:takeWhileInclude fn items
+        else [x]
