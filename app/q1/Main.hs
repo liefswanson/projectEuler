@@ -8,6 +8,6 @@ main =
         upper    = 1000-1
         threes   = sumToN $ upper `div` 3
         fives    = sumToN $ upper `div` 5
-        fifteens = sumToN $ upper `div` 15
+        fifteens = sumToN $ upper `div` (lcm 3 5)
     in
-        putStrLn $ show $ 3*threes + 5*fives - 15*fifteens
+        putStrLn $ show $ 3*threes + 5*fives - (lcm 3 5)*fifteens

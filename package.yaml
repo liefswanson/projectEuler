@@ -196,6 +196,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - projectEuler
+    - unordered-containers
 
 tests:
   projectEuler-test:

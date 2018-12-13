@@ -3,7 +3,8 @@ module Util (
     runLength,
     none,
     greatest,
-    takeWhileInclude
+    takeWhileInclude,
+    removeCharacters
 ) where
 
 greatest :: Ord a => [a] -> a
@@ -30,3 +31,6 @@ takeWhileInclude fn (x:items) =
     if fn x
         then x:takeWhileInclude fn items
         else [x]
+
+removeCharacters :: String -> String -> String
+removeCharacters values str = [c | c <- str, not (c `elem` values)]

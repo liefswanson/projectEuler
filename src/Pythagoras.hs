@@ -1,28 +1,45 @@
 module Pythagoras (
-    pythagoreanTriples
+    pythagoreanTripleSequence,
+    Triple(..),
+    perimeter
 ) where
 
-pythagoreanTriples :: Integer -> [[Integer]]
-pythagoreanTriples maxLength = [3,4,5] : buildPythagoreanTreeFrom maxLength [3,4,5]
+data Triple = Triple {
+    a :: Integer,
+    b :: Integer,
+    c :: Integer
+} deriving (Show)
 
-buildPythagoreanTreeFrom :: Integer -> [Integer] -> [[Integer]]
-buildPythagoreanTreeFrom 0 _ = []
-buildPythagoreanTreeFrom maxLength [a,b,c] =
+perimeter :: Triple -> Integer
+perimeter (Triple a b c) = a + b + c
+
+pythagoreanTripleSequence :: [Triple]
+pythagoreanTripleSequence =
     let
-        left  = [  a - 2*b + 2*c,
-                 2*a -   b + 2*c,
-                 2*a - 2*b + 3*c]
-
-        mid   = [  a + 2*b + 2*c,
-                 2*a +   b + 2*c,
-                 2*a + 2*b + 3*c]
-
-        right = [ -a + 2*b + 2*c,
-                -2*a +   b + 2*c,
-                -2*a + 2*b + 3*c]
-
-        sieve       = any (<= maxLength)
-        children    = filter sieve [left, mid, right]
-        descendants = concat $ map (buildPythagoreanTreeFrom maxLength) children
+        topLayer = [Triple 3 4 5]
+        trips = topLayer:pythagoreanTriplesHelper topLayer
     in
-        children ++ descendants
+        concat trips
+
+pythagoreanTriplesHelper :: [Triple] -> [[Triple]]
+pythagoreanTriplesHelper previousLayer =
+    let
+        left (Triple a b c)  = Triple (  a - 2*b + 2*c)
+                                      (2*a -   b + 2*c)
+                                      (2*a - 2*b + 3*c)
+
+        mid (Triple a b c)   = Triple (  a + 2*b + 2*c)
+                                      (2*a +   b + 2*c)
+                                      (2*a + 2*b + 3*c)
+
+        right (Triple a b c) = Triple (  -a + 2*b + 2*c)
+                                      (-2*a +   b + 2*c)
+                                      (-2*a + 2*b + 3*c)
+
+        lefts  = map left previousLayer
+        mids   = map mid previousLayer
+        rights = map right previousLayer
+
+        newLayer = concat [lefts, mids, rights]
+    in
+        newLayer:pythagoreanTriplesHelper newLayer

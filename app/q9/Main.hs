@@ -1,17 +1,18 @@
 module Main where
 
-import Pythagoras (pythagoreanTriples)
+import Pythagoras (Triple(..), pythagoreanTripleSequence, perimeter)
 import Primes (divides)
 
 main :: IO ()
 main =
     let
         target  = 1000
-        triples = pythagoreanTriples target
-        sieve x = (sum x) `divides` target
-        match   = head $filter sieve triples
-        factor  = target `div` (sum match)
-        result  = map (*factor) match
+        sieve trip = (perimeter trip) `divides` target
+        match   = head $ filter sieve pythagoreanTripleSequence
+        factor  = target `div` (perimeter match)
+
+        asList (Triple a b c) = map (*factor) [a, b, c]
+        result = asList match
 
         triple = show $ result
         summed = show $ sum result
