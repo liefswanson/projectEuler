@@ -1,7 +1,6 @@
 module Main where
 
 import Collatz (collatzSequenceFrom)
-import Util (greatest)
 
 -- would it could be faster to build a collatz tree and create a hashmap to each root
 main :: IO ()
@@ -13,7 +12,7 @@ main =
         lens = map length sequences
         results = zip lens iter
 
-        (len, elem) = greatest results
+        (len, elem) = maximum results
 
         output = "length: " ++ (show len)  ++ "\n" ++
                  "start : " ++ (show elem) ++ "\n"

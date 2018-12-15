@@ -24,20 +24,20 @@ pythagoreanTripleSequence =
 pythagoreanTriplesHelper :: [Triple] -> [[Triple]]
 pythagoreanTriplesHelper previousLayer =
     let
-        left (Triple a b c)  = Triple (  a - 2*b + 2*c)
-                                      (2*a -   b + 2*c)
-                                      (2*a - 2*b + 3*c)
+        left  (Triple a b c) = Triple (   a - 2*b + 2*c)
+                                      ( 2*a -   b + 2*c)
+                                      ( 2*a - 2*b + 3*c)
 
-        mid (Triple a b c)   = Triple (  a + 2*b + 2*c)
-                                      (2*a +   b + 2*c)
-                                      (2*a + 2*b + 3*c)
+        mid   (Triple a b c) = Triple (   a + 2*b + 2*c)
+                                      ( 2*a +   b + 2*c)
+                                      ( 2*a + 2*b + 3*c)
 
         right (Triple a b c) = Triple (  -a + 2*b + 2*c)
                                       (-2*a +   b + 2*c)
                                       (-2*a + 2*b + 3*c)
 
-        lefts  = map left previousLayer
-        mids   = map mid previousLayer
+        lefts  = map left  previousLayer
+        mids   = map mid   previousLayer
         rights = map right previousLayer
 
         newLayer = concat [lefts, mids, rights]

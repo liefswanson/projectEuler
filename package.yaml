@@ -21,6 +21,10 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- vector
+- unordered-containers
+- containers
+- split
 
 library:
   source-dirs: src
@@ -187,16 +191,97 @@ executables:
   #   dependencies:
   #   - projectEuler
 
-  q17:
+  # q17:
+  #   main:                Main.hs
+  #   source-dirs:         app/q17
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+  #   - unordered-containers
+
+  # q18:
+  #   main:                Main.hs
+  #   source-dirs:         app/q18
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q19:
+  #   main:                Main.hs
+  #   source-dirs:         app/q19
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q20:
+  #   main:                Main.hs
+  #   source-dirs:         app/q20
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q21:
+  #   main:                Main.hs
+  #   source-dirs:         app/q21
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+  #   - containers
+
+  # q22:
+  #   main:                Main.hs
+  #   source-dirs:         app/q22
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q23:
+  #   main:                Main.hs
+  #   source-dirs:         app/q23
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q24:
+  #   main:                Main.hs
+  #   source-dirs:         app/q24
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  q25:
     main:                Main.hs
-    source-dirs:         app/q17
+    source-dirs:         app/q25
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
     - projectEuler
-    - unordered-containers
 
 tests:
   projectEuler-test:

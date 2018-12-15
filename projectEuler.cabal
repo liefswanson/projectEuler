@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7712f7552e6a8b295ede998b6a837ea6bac3b3ac14ce4a561f697626e1d396c8
+-- hash: e892e89860407cac8b924d1b536703b85bbd6747563b23a2fe9b9be29ee08a94
 
 name:           projectEuler
 version:        0.1.0.0
@@ -29,8 +29,11 @@ library
   exposed-modules:
       Collatz
       Counting
+      Dates
+      Names
       Primes
       Pythagoras
+      Sets
       Util
   other-modules:
       Paths_projectEuler
@@ -38,31 +41,26 @@ library
       src
   build-depends:
       base >=4.7 && <5
-  default-language: Haskell2010
-
-executable q17
-  main-is: Main.hs
-  other-modules:
-      Paths_projectEuler
-  hs-source-dirs:
-      app/q17
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
-  build-depends:
-      base >=4.7 && <5
-    , projectEuler
+    , containers
+    , split
     , unordered-containers
+    , vector
   default-language: Haskell2010
 
-executable q9
+executable q25
   main-is: Main.hs
   other-modules:
       Paths_projectEuler
   hs-source-dirs:
-      app/q9
+      app/q25
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , containers
     , projectEuler
+    , split
+    , unordered-containers
+    , vector
   default-language: Haskell2010
 
 test-suite projectEuler-test
@@ -75,5 +73,9 @@ test-suite projectEuler-test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
+    , containers
     , projectEuler
+    , split
+    , unordered-containers
+    , vector
   default-language: Haskell2010

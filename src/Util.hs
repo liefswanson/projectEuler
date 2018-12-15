@@ -2,13 +2,15 @@ module Util (
     palindrome,
     runLength,
     none,
-    greatest,
     takeWhileInclude,
-    removeCharacters
+    removeCharacters,
+    maxPathSum,
+    runningTotal,
+    removeDuplicates,
 ) where
 
-greatest :: Ord a => [a] -> a
-greatest (x:items) = foldl max x items
+import Data.Set (toList, fromList)
+import Data.List(delete)
 
 none :: (a -> Bool) -> [a] -> Bool
 none fn = not.(any fn)
@@ -33,4 +35,17 @@ takeWhileInclude fn (x:items) =
         else [x]
 
 removeCharacters :: String -> String -> String
-removeCharacters values str = [c | c <- str, not (c `elem` values)]
+removeCharacters values str = filter (\c -> not (c `elem` values)) str
+
+maxPathSum :: [[Int]] -> Int
+maxPathSum (x:xs) =
+    let
+        combine acc curr = zipWith (+) curr $ zipWith max acc (tail acc)
+    in
+        head $ foldl combine x xs
+
+runningTotal :: Num a => [a] -> [a]
+runningTotal = scanl1 (+)
+
+removeDuplicates :: (Ord a) => [a] -> [a]
+removeDuplicates = toList.fromList

@@ -1,7 +1,6 @@
 module Main where
 
 import Data.Vector (Vector, fromList, (!))
-import Util (greatest)
 
 main :: IO ()
 main = do
@@ -29,7 +28,7 @@ main = do
     let results2 = map fn2 iter2
 
     let final = results2 ++ results
-    print $ greatest $ map product final
+    print $ maximum $ map product final
 
 -- back diagonal
 maxSeq2 :: Vector(Vector(Int)) -> (Int,Int) -> Int -> [Int]

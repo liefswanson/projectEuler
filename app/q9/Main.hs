@@ -10,7 +10,6 @@ main =
         sieve trip = (perimeter trip) `divides` target
         match   = head $ filter sieve pythagoreanTripleSequence
         factor  = target `div` (perimeter match)
-
         asList (Triple a b c) = map (*factor) [a, b, c]
         result = asList match
 
