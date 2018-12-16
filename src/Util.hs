@@ -7,10 +7,14 @@ module Util (
     maxPathSum,
     runningTotal,
     removeDuplicates,
+    digits,
 ) where
 
 import Data.Set (toList, fromList)
 import Data.List(delete)
+
+digits :: Integral a => a -> Int
+digits = length.show.toInteger
 
 none :: (a -> Bool) -> [a] -> Bool
 none fn = not.(any fn)

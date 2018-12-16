@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e892e89860407cac8b924d1b536703b85bbd6747563b23a2fe9b9be29ee08a94
+-- hash: 605f70c2a213dba59df495fb7aa7bc9c087116c8b205616716e054264195664b
 
 name:           projectEuler
 version:        0.1.0.0
@@ -31,6 +31,7 @@ library
       Counting
       Dates
       Names
+      Polynomials
       Primes
       Pythagoras
       Sets
@@ -47,12 +48,12 @@ library
     , vector
   default-language: Haskell2010
 
-executable q25
+executable q26
   main-is: Main.hs
   other-modules:
       Paths_projectEuler
   hs-source-dirs:
-      app/q25
+      app/q26
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5

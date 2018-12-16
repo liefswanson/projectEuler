@@ -28,7 +28,7 @@ prime n =
         upper          = floor.sqrt $ fromIntegral n
         smallPrimes    = takeWhile (<= upper) primeSequence
     in
-        none (`divides` n) smallPrimes
+        n > 0 && none (`divides` n) smallPrimes
 
 primeSequence :: [Integer]
 primeSequence = 2:filter prime [3,5 ..]
