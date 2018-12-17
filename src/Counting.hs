@@ -15,6 +15,7 @@ choose n k
     | n == 0    = 0
     | n < k     = 0
     | k < 0     = 0
+    | 2*k < n   = choose n (n-k)
     | otherwise = product [k+1 .. n] `div` product [1 .. (n-k)]
 
 sumToN :: (Integral a) => a -> a

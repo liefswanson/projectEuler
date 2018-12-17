@@ -139,7 +139,6 @@ executables:
   #   - -with-rtsopts=-N
   #   dependencies:
   #   - projectEuler
-  #   - vector
 
   # q12:
   #   main:                Main.hs
@@ -200,7 +199,6 @@ executables:
   #   - -with-rtsopts=-N
   #   dependencies:
   #   - projectEuler
-  #   - unordered-containers
 
   # q18:
   #   main:                Main.hs
@@ -241,7 +239,6 @@ executables:
   #   - -with-rtsopts=-N
   #   dependencies:
   #   - projectEuler
-  #   - containers
 
   # q22:
   #   main:                Main.hs
@@ -283,15 +280,66 @@ executables:
   #   dependencies:
   #   - projectEuler
 
-  q26:
+  # q26:
+  #   main:                Main.hs
+  #   source-dirs:         app/q26
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q27:
+  #   main:                Main.hs
+  #   source-dirs:         app/q27
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q28:
+  #   main:                Main.hs
+  #   source-dirs:         app/q28
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q29:
+  #   main:                Main.hs
+  #   source-dirs:         app/q29
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q30:
+  #   main:                Main.hs
+  #   source-dirs:         app/q30
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  q31:
     main:                Main.hs
-    source-dirs:         app/q26
+    source-dirs:         app/q31
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
     - projectEuler
+
 
 tests:
   projectEuler-test:

@@ -1,21 +1,34 @@
 module Main where
 
-import Data.Foldable (maximumBy)
-import Polynomials (intPoly)
-import Primes (primeSequence, prime)
+import Data.HashSet (member, insert, HashSet, empty)
+import Util (takeWhileInclude)
+
 
 main :: IO ()
 main =
     let
-        primes = map fromIntegral $ takeWhile (<= 1000) primeSequence
-        rawPolys = [[1, a, b] | a <- [-999,-997 .. 999],
-                                b <- primes]
-        polys = zipWith (map.intPoly) rawPolys (repeat [0..])
-        sieve = prime.fromIntegral
-        results = map (takeWhile sieve) polys
-        zipped = zip (map length results) rawPolys
-        (len, bestPrimePoly) = maximum zipped
-
-        answer = (len, bestPrimePoly, product bestPrimePoly)
+        upper = 1000 - 1
+        range = [1..upper]
+        results = map (longDivideUntilRepeat 10 1) range
+        lengths = map length results
+        indexed = zip lengths range
+        (_, longest) = maximum indexed
     in
-        print answer
+        print longest
+
+
+longDivideUntilRepeat :: Int -> Int -> Int -> [(Int, Int)]
+longDivideUntilRepeat base top bottom = longDivideUntilRepeatHelper base empty [] top bottom
+
+longDivideUntilRepeatHelper :: Int -> HashSet (Int, Int) -> [(Int, Int)] -> Int -> Int -> [(Int, Int)]
+longDivideUntilRepeatHelper base hashes history top bottom =
+    let
+        pair = (top*base) `divMod` bottom
+        r = snd pair
+        cycleDetected = pair `member` hashes
+        hashes' = insert pair hashes
+        history' = pair:history
+    in
+        if cycleDetected
+            then reverse $ takeWhileInclude (/=pair) history
+            else longDivideUntilRepeatHelper base hashes' history' r bottom

@@ -8,10 +8,23 @@ module Util (
     runningTotal,
     removeDuplicates,
     digits,
+    partitionBy,
+    everyNth,
 ) where
 
 import Data.Set (toList, fromList)
 import Data.List(delete)
+
+everyNth :: Int -> [a] -> [a]
+everyNth _ [] = []
+everyNth n (x:xs) = x:everyNth n remaining
+    where remaining = drop (n-1) xs
+
+partitionBy :: [Int] -> [a] -> [[a]]
+partitionBy _  [] = []
+partitionBy [] xs = [xs]
+partitionBy (size:sizes) xs = grouped:partitionBy sizes remaining
+    where (grouped, remaining) = splitAt size xs
 
 digits :: Integral a => a -> Int
 digits = length.show.toInteger

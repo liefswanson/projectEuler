@@ -17,10 +17,11 @@ main =
         print $ sum areNotSummation
 
 
+-- this is n^2 and should be fixed
 isSumOfTwoFrom :: Integer -> [Integer] -> HashSet Integer -> Bool
 isSumOfTwoFrom n listSet hashSet =
     let
-        xs = zipWith (-) (repeat n) $ listSet
+        xs = map (n-) listSet
         possibleSums = filter (`member` hashSet) xs
     in
-        length possibleSums /= 0
+        null possibleSums

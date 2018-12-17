@@ -33,21 +33,19 @@ prime n =
 primeSequence :: [Integer]
 primeSequence = 2:filter prime [3,5 ..]
 
-primeFactors :: Integer -> [Integer]
+primeFactors :: Integral a => a -> [a]
 primeFactors n
     | n == 0 = []
-    | n < 0  = -1:primeFactors(-n)
-    | otherwise = primeFactorsHelper [2..] n
+    | n < 0  = -1:primeFactors (-n)
+    | otherwise = primeFactorsHelper (map fromIntegral primeSequence) n
 
-
-primeFactorsHelper :: [Integer] -> Integer -> [Integer]
+primeFactorsHelper :: Integral a => [a] -> a -> [a]
 primeFactorsHelper _ 1 = []
-primeFactorsHelper candidates n =
-    let
-        divisor   = head $ filter (`divides` n) candidates
-        remaining = n `div` divisor
-    in
-        divisor : primeFactorsHelper [divisor..] remaining
+primeFactorsHelper (p:primes) n =
+    if p `divides` n
+        then p:primeFactorsHelper (p:primes) (n `div` p)
+        else primeFactorsHelper primes n
+
 
 mergeFactorLists :: [(Integer, Int)] -> [(Integer, Int)] -> [(Integer,Int)]
 mergeFactorLists as [] = as
@@ -95,12 +93,13 @@ listDivisorsBrute :: Integer -> [Integer]
 listDivisorsBrute n =
     let
         sqn = floor.sqrt $ fromIntegral n
-        smaller = filter (`divides` n) [1..(sqn-1)]
-        larger = reverse $ map (n `div`) smaller
+        smaller = filter (`divides` n) [1..sqn]
+        toMirror = if (sqn^2 == n)
+                    then init smaller
+                    else smaller
+        larger = reverse $ map (n `div`) toMirror
     in
-        if sqn `divides` n
-            then smaller ++ sqn:larger
-            else smaller ++ larger
+        smaller ++ larger
 
 options :: (Integer, Int) -> [(Integer, Int)]
 options (base, exp) = [(base, x) | x <- [0..exp]]

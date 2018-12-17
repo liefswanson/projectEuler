@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 605f70c2a213dba59df495fb7aa7bc9c087116c8b205616716e054264195664b
+-- hash: 0e390dead624d21119172d2044806af532a9cca2c9e453aa81fcc324e217b007
 
 name:           projectEuler
 version:        0.1.0.0
@@ -30,11 +30,13 @@ library
       Collatz
       Counting
       Dates
+      DynamicProgramming
       Names
       Polynomials
       Primes
       Pythagoras
       Sets
+      Spiral
       Util
   other-modules:
       Paths_projectEuler
@@ -48,12 +50,12 @@ library
     , vector
   default-language: Haskell2010
 
-executable q26
+executable q31
   main-is: Main.hs
   other-modules:
       Paths_projectEuler
   hs-source-dirs:
-      app/q26
+      app/q31
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
