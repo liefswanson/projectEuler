@@ -2,6 +2,7 @@ module Primes (
     primeSequence,
     primeFactors,
     prime,
+    prime',
     divides,
     mergeFactorLists,
     multiplyFactorList,
@@ -13,14 +14,21 @@ module Primes (
     isPerfect,
     isAbundant,
     isDeficient,
+
 ) where
 
-import Util (none, runLength, removeDuplicates)
+import Util (none, runLength, removeDuplicates, digits)
 import Sets (powerset)
 import Data.List (sort)
 
 divides :: Integral a => a -> a -> Bool
 divides a b = b `mod` a == 0
+
+prime' :: Integral a => a -> Bool
+prime' n = n > 1 && primeCheck
+    where
+        primeCheck = none (`divides` n) $ 2:[3,5..upper]
+        upper = floor.sqrt $ fromIntegral n
 
 prime :: Integer -> Bool
 prime n =
@@ -28,7 +36,7 @@ prime n =
         upper          = floor.sqrt $ fromIntegral n
         smallPrimes    = takeWhile (<= upper) primeSequence
     in
-        n > 0 && none (`divides` n) smallPrimes
+        n > 1 && none (`divides` n) smallPrimes
 
 primeSequence :: [Integer]
 primeSequence = 2:filter prime [3,5 ..]
@@ -37,15 +45,16 @@ primeFactors :: Integral a => a -> [a]
 primeFactors n
     | n == 0 = []
     | n < 0  = -1:primeFactors (-n)
-    | otherwise = primeFactorsHelper (map fromIntegral primeSequence) n
+    | otherwise = primeFactorsHelper (map fromIntegral [2..]) n
 
 primeFactorsHelper :: Integral a => [a] -> a -> [a]
 primeFactorsHelper _ 1 = []
 primeFactorsHelper (p:primes) n =
-    if p `divides` n
+    if p*p > n
+    then [n]
+    else if p `divides` n
         then p:primeFactorsHelper (p:primes) (n `div` p)
         else primeFactorsHelper primes n
-
 
 mergeFactorLists :: [(Integer, Int)] -> [(Integer, Int)] -> [(Integer,Int)]
 mergeFactorLists as [] = as
@@ -95,8 +104,8 @@ listDivisorsBrute n =
         sqn = floor.sqrt $ fromIntegral n
         smaller = filter (`divides` n) [1..sqn]
         toMirror = if (sqn^2 == n)
-                    then init smaller
-                    else smaller
+                   then init smaller
+                   else smaller
         larger = reverse $ map (n `div`) toMirror
     in
         smaller ++ larger

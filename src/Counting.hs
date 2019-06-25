@@ -1,10 +1,20 @@
 module Counting (
     factorial,
     choose,
+    combinations,
     sumToN,
+    isPerfectSquare,
     fibonacciSequence,
-    triangleSequence
+    triangleSequence,
+    pentagonalSequence,
+    hexagonalSequence,
+    isTriangular,
+    isPentagonal,
+    isHexagonal
 ) where
+
+import Util (isqrt)
+import Data.List (tails)
 
 factorial :: (Integral a)  => a -> a
 factorial n = product [1..n]
@@ -18,19 +28,50 @@ choose n k
     | 2*k < n   = choose n (n-k)
     | otherwise = product [k+1 .. n] `div` product [1 .. (n-k)]
 
+combinations :: Int -> [a] -> [[a]]
+combinations 0 _  = [ [] ]
+combinations n xs = [ y:ys | y:xs' <- tails xs,
+                             ys <- combinations (n-1) xs']
+
 sumToN :: (Integral a) => a -> a
 sumToN n = n*(n+1) `div` 2
+
+isPerfectSquare :: Integral a => a -> Bool
+isPerfectSquare n = n == (isqrt n)^2
 
 fibonacciSequence :: [Integer]
 fibonacciSequence = 0:1:zipWith (+) fibonacciSequence (tail fibonacciSequence)
 
 triangleSequence :: [Integer]
-triangleSequence = triangleSequenceHelper 0 1
+triangleSequence = ngonSequenceHelper 0 1 id
 
-triangleSequenceHelper :: Integer -> Integer -> [Integer]
-triangleSequenceHelper count idx =
+pentagonalSequence :: [Integer]
+pentagonalSequence = ngonSequenceHelper 0 0 (\x -> 3*x+1)
+
+hexagonalSequence :: [Integer]
+hexagonalSequence = ngonSequenceHelper 0 0 (\x -> 4*x+1)
+
+ngonSequenceHelper :: Integer -> Integer -> (Integer -> Integer) -> [Integer]
+ngonSequenceHelper count idx mapper =
     let
-        count' = count + idx
+        count' = count + mapper idx
         idx' = idx + 1
     in
-        count':triangleSequenceHelper count' idx'
+        count': ngonSequenceHelper count' idx' mapper
+
+isPentagonal :: Integral a => a -> Bool
+isPentagonal x = isNgon x 6 (\n-> 24*n+1)
+
+isTriangular :: Integral a => a -> Bool
+isTriangular x = isNgon x 2 (\n-> 8*n+1)
+
+isHexagonal :: Integral a => a -> Bool
+isHexagonal x = isNgon x 4 (\n-> 8*n+1)
+
+isNgon :: Integral a => a -> a -> (a -> a) -> Bool
+isNgon x d mapper = firstCheck && secondCheck
+    where
+        underRoot = mapper x
+        rooted = isqrt underRoot
+        firstCheck = rooted * rooted == underRoot
+        secondCheck = (rooted+1) `mod` d == 0

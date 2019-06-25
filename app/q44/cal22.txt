@@ -1,0 +1,66 @@
+If two pentagonal numbers Pj and Pk differ by n, then 3/2j2−1/2j−3/2k2+1/2k=n, or equivalently (3/2j+3/2k−1/2)(j−k)=n. Therefore we wish to solve said equation over the natural numbers.
+
+To do this we iterate over each divisor pair of n; if we let n=ab, then we get 3/2j+3/2k−1/2=a and j−k=b. Solving this simultaneous equation gives j=(2a+3b+1)/6,k=j−b. If both j and k are natural numbers then we have found two pentagonal numbers, Pj and Pk whose difference is n.
+
+Now it's quite simple: for each pentagonal number Pi, we find all pentagonal pairs whose difference is Pi. We check if any of those pairs sum to a pentagonal number, and if so, we have our answer!
+
+PythonHide Code
+
+from math import sqrt, floor
+
+
+def get_nth_pentagonal_number(n):
+    return n * (3*n - 1) // 2
+
+
+def is_pentagonal_number(n):
+    return ((sqrt(24*n + 1) + 1) / 6).is_integer()
+
+
+def get_divisor_pairs(n):
+    pairs = []
+
+    for i in range(1, floor(sqrt(n)) + 1):
+        if n % i == 0:
+            pairs.append((i, n // i))
+            pairs.append((n // i, i))
+            pairs.append((-i, -n // i))
+            pairs.append((-n // i, -i))
+
+    return pairs
+
+
+def get_pentagonal_pairs_differing_by(n):
+    pairs = set()
+
+    for a, b in get_divisor_pairs(n):
+        j = (2*a + 3*b + 1) / 6
+        k = j - b
+
+        if j > 0 and k > 0 and j.is_integer() and k.is_integer():
+            pairs.add((
+                get_nth_pentagonal_number(int(j)),
+                get_nth_pentagonal_number(int(k))
+            ))
+
+    return pairs
+
+
+def sums_to_pentagonal_number(a, b):
+    return is_pentagonal_number(a + b)
+
+
+i = 1
+while True:
+    pentagonal_number = get_nth_pentagonal_number(i)
+    potential_solutions = get_pentagonal_pairs_differing_by(pentagonal_number)
+    solution_check = [sums_to_pentagonal_number(a, b) for a, b in potential_solutions]
+    if any(solution_check):
+        break
+
+    i += 1
+
+print(pentagonal_number)
+
+
+Runs in about 0.2 seconds.
