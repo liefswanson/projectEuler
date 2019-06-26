@@ -32,7 +32,7 @@ library:
 executables:
   # q1:
   #   main:                Main.hs
-  #   source-dirs:         app/q1
+  #   source-dirs:         app/p1/q1
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -42,7 +42,7 @@ executables:
 
   # q2:
   #   main:                Main.hs
-  #   source-dirs:         app/q2
+  #   source-dirs:         app/p1/q2
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -52,7 +52,7 @@ executables:
 
   # q3:
   #   main:                Main.hs
-  #   source-dirs:         app/q3
+  #   source-dirs:         app/p1/q3
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -62,7 +62,7 @@ executables:
 
   # q4:
   #   main:                Main.hs
-  #   source-dirs:         app/q4
+  #   source-dirs:         app/p1/q4
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -72,7 +72,7 @@ executables:
 
   # q5:
   #   main:                Main.hs
-  #   source-dirs:         app/q5
+  #   source-dirs:         app/p1/q5
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -82,7 +82,7 @@ executables:
 
   # q6:
   #   main:                Main.hs
-  #   source-dirs:         app/q6
+  #   source-dirs:         app/p1/q6
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -92,7 +92,7 @@ executables:
 
   # q7:
   #   main:                Main.hs
-  #   source-dirs:         app/q7
+  #   source-dirs:         app/p1/q7
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -102,7 +102,7 @@ executables:
 
   # q8:
   #   main:                Main.hs
-  #   source-dirs:         app/q8
+  #   source-dirs:         app/p1/q8
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -112,7 +112,7 @@ executables:
 
   # q9:
   #   main:                Main.hs
-  #   source-dirs:         app/q9
+  #   source-dirs:         app/p1/q9
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -122,7 +122,7 @@ executables:
 
   # q10:
   #   main:                Main.hs
-  #   source-dirs:         app/q10
+  #   source-dirs:         app/p1/q10
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -132,7 +132,7 @@ executables:
 
   # q11:
   #   main:                Main.hs
-  #   source-dirs:         app/q11
+  #   source-dirs:         app/p1/q11
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -142,7 +142,7 @@ executables:
 
   # q12:
   #   main:                Main.hs
-  #   source-dirs:         app/q12
+  #   source-dirs:         app/p1/q12
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -152,7 +152,7 @@ executables:
 
   # q13:
   #   main:                Main.hs
-  #   source-dirs:         app/q13
+  #   source-dirs:         app/p1/q13
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -162,7 +162,7 @@ executables:
 
   # q14:
   #   main:                Main.hs
-  #   source-dirs:         app/q14
+  #   source-dirs:         app/p1/q14
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -172,7 +172,7 @@ executables:
 
   # q15:
   #   main:                Main.hs
-  #   source-dirs:         app/q15
+  #   source-dirs:         app/p1/q15
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -182,7 +182,7 @@ executables:
 
   # q16:
   #   main:                Main.hs
-  #   source-dirs:         app/q16
+  #   source-dirs:         app/p1/q16
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -192,7 +192,7 @@ executables:
 
   # q17:
   #   main:                Main.hs
-  #   source-dirs:         app/q17
+  #   source-dirs:         app/p1/q17
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -202,7 +202,7 @@ executables:
 
   # q18:
   #   main:                Main.hs
-  #   source-dirs:         app/q18
+  #   source-dirs:         app/p1/q18
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -212,7 +212,7 @@ executables:
 
   # q19:
   #   main:                Main.hs
-  #   source-dirs:         app/q19
+  #   source-dirs:         app/p1/q19
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -222,7 +222,7 @@ executables:
 
   # q20:
   #   main:                Main.hs
-  #   source-dirs:         app/q20
+  #   source-dirs:         app/p1/q20
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -232,7 +232,7 @@ executables:
 
   # q21:
   #   main:                Main.hs
-  #   source-dirs:         app/q21
+  #   source-dirs:         app/p1/q21
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -242,7 +242,7 @@ executables:
 
   # q22:
   #   main:                Main.hs
-  #   source-dirs:         app/q22
+  #   source-dirs:         app/p1/q22
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -252,7 +252,7 @@ executables:
 
   # q23:
   #   main:                Main.hs
-  #   source-dirs:         app/q23
+  #   source-dirs:         app/p1/q23
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -262,7 +262,7 @@ executables:
 
   # q24:
   #   main:                Main.hs
-  #   source-dirs:         app/q24
+  #   source-dirs:         app/p1/q24
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -272,7 +272,7 @@ executables:
 
   # q25:
   #   main:                Main.hs
-  #   source-dirs:         app/q25
+  #   source-dirs:         app/p1/q25
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -282,7 +282,7 @@ executables:
 
   # q26:
   #   main:                Main.hs
-  #   source-dirs:         app/q26
+  #   source-dirs:         app/p1/q26
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -292,7 +292,7 @@ executables:
 
   # q27:
   #   main:                Main.hs
-  #   source-dirs:         app/q27
+  #   source-dirs:         app/p1/q27
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -302,7 +302,7 @@ executables:
 
   # q28:
   #   main:                Main.hs
-  #   source-dirs:         app/q28
+  #   source-dirs:         app/p1/q28
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -312,7 +312,7 @@ executables:
 
   # q29:
   #   main:                Main.hs
-  #   source-dirs:         app/q29
+  #   source-dirs:         app/p1/q29
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -322,7 +322,7 @@ executables:
 
   # q30:
   #   main:                Main.hs
-  #   source-dirs:         app/q30
+  #   source-dirs:         app/p1/q30
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -332,7 +332,7 @@ executables:
 
   # q31:
   #   main:                Main.hs
-  #   source-dirs:         app/q31
+  #   source-dirs:         app/p1/q31
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -342,7 +342,7 @@ executables:
 
   # q32:
   #   main:                Main.hs
-  #   source-dirs:         app/q32
+  #   source-dirs:         app/p1/q32
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -352,7 +352,7 @@ executables:
 
   # q33:
   #   main:                Main.hs
-  #   source-dirs:         app/q33
+  #   source-dirs:         app/p1/q33
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -362,7 +362,7 @@ executables:
 
   # q34:
   #   main:                Main.hs
-  #   source-dirs:         app/q34
+  #   source-dirs:         app/p1/q34
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -372,7 +372,7 @@ executables:
 
   # q35:
   #   main:                Main.hs
-  #   source-dirs:         app/q35
+  #   source-dirs:         app/p1/q35
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -382,7 +382,7 @@ executables:
 
   # q36:
   #   main:                Main.hs
-  #   source-dirs:         app/q36
+  #   source-dirs:         app/p1/q36
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -392,7 +392,7 @@ executables:
 
   # q37:
   #   main:                Main.hs
-  #   source-dirs:         app/q37
+  #   source-dirs:         app/p1/q37
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -402,7 +402,7 @@ executables:
 
   # q38:
   #   main:                Main.hs
-  #   source-dirs:         app/q38
+  #   source-dirs:         app/p1/q38
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -412,7 +412,7 @@ executables:
 
   # q39:
   #   main:                Main.hs
-  #   source-dirs:         app/q39
+  #   source-dirs:         app/p1/q39
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -422,7 +422,7 @@ executables:
 
   # q40:
   #   main:                Main.hs
-  #   source-dirs:         app/q40
+  #   source-dirs:         app/p1/q40
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -432,7 +432,7 @@ executables:
 
   # q41:
   #   main:                Main.hs
-  #   source-dirs:         app/q41
+  #   source-dirs:         app/p1/q41
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -442,7 +442,7 @@ executables:
 
   # q42:
   #   main:                Main.hs
-  #   source-dirs:         app/q42
+  #   source-dirs:         app/p1/q42
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -452,7 +452,7 @@ executables:
 
   # q43:
   #   main:                Main.hs
-  #   source-dirs:         app/q43
+  #   source-dirs:         app/p1/q43
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -462,7 +462,7 @@ executables:
 
   # q44:
   #   main:                Main.hs
-  #   source-dirs:         app/q44
+  #   source-dirs:         app/p1/q44
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -472,7 +472,7 @@ executables:
 
   # q45:
   #   main:                Main.hs
-  #   source-dirs:         app/q45
+  #   source-dirs:         app/p1/q45
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -482,7 +482,7 @@ executables:
 
   # q46:
   #   main:                Main.hs
-  #   source-dirs:         app/q46
+  #   source-dirs:         app/p1/q46
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -492,7 +492,7 @@ executables:
 
   # q47:
   #   main:                Main.hs
-  #   source-dirs:         app/q47
+  #   source-dirs:         app/p1/q47
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -502,7 +502,7 @@ executables:
 
   # q48:
   #   main:                Main.hs
-  #   source-dirs:         app/q48
+  #   source-dirs:         app/p1/q48
   #   ghc-options:
   #   - -threaded
   #   - -rtsopts
@@ -510,9 +510,19 @@ executables:
   #   dependencies:
   #   - projectEuler
 
-  q49:
+  # q49:
+  #   main:                Main.hs
+  #   source-dirs:         app/p1/q49
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  q50:
     main:                Main.hs
-    source-dirs:         app/q49
+    source-dirs:         app/p1/q50
     ghc-options:
     - -threaded
     - -rtsopts

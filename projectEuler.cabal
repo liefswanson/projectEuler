@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 17fc7ef9d1d347fafdcf115e2f69305ae02b451922611a454b0ada3031077013
+-- hash: 0a4f5a92b7cadd026d5ceb1ef7c6578a37c440caa38f862121d7efe1d9000ce4
 
 name:           projectEuler
 version:        0.1.0.0
@@ -51,12 +51,12 @@ library
     , vector
   default-language: Haskell2010
 
-executable q49
+executable q50
   main-is: Main.hs
   other-modules:
       Paths_projectEuler
   hs-source-dirs:
-      app/q49
+      app/p1/q50
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       base >=4.7 && <5
