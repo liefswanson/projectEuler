@@ -530,16 +530,35 @@ executables:
   #   dependencies:
   #   - projectEuler
 
-  q51:
+  # q51:
+  #   main:                Main.hs
+  #   source-dirs:         app/p2/q51
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  # q52:
+  #   main:                Main.hs
+  #   source-dirs:         app/p2/q52
+  #   ghc-options:
+  #   - -threaded
+  #   - -rtsopts
+  #   - -with-rtsopts=-N
+  #   dependencies:
+  #   - projectEuler
+
+  q53:
     main:                Main.hs
-    source-dirs:         app/p2/q51
+    source-dirs:         app/p2/q53
     ghc-options:
     - -threaded
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
     - projectEuler
-
 
 tests:
   projectEuler-test:
