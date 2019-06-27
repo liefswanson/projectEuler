@@ -73,5 +73,5 @@ isNgon x d mapper = firstCheck && secondCheck
     where
         underRoot = mapper x
         rooted = isqrt underRoot
-        firstCheck = rooted * rooted == underRoot
+        firstCheck = rooted^2 == underRoot
         secondCheck = (rooted+1) `mod` d == 0
