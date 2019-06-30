@@ -6,6 +6,7 @@ module Cards (
     cardToString,
     makePokerHand,
     faceGroups,
+    getTestResults,
     stringToCard,
     stringToPokerHand,
     isFlush,
@@ -17,6 +18,7 @@ module Cards (
     isFullHouse,
     isTwoPair,
     isOnePair,
+    shortShow,
 ) where
 
 import Data.List (sort, all)
@@ -66,21 +68,21 @@ suitMap = fromList $ zip suitOrderString [Clubs ..]
 data Card = Card {
     face :: Face,
     suit :: Suit
-} deriving (Show, Eq, Ord)
+} deriving (Show, Eq)
 
--- instance Ord Card where
---     compare (Card a _) (Card b _) =
---         if a > b
---             then GT
---         else if a < b
---             then LT
---             else EQ
---     (<)  (Card a _) (Card b _) = a < b
---     (>)  (Card a _) (Card b _) = a > b
---     (<=) (Card a _) (Card b _) = a <= b
---     (>=) (Card a _) (Card b _) = a >= b
---     max a b = if a > b then a else b
---     min a b = if a < b then a else b
+instance Ord Card where
+    compare (Card a _) (Card b _) =
+        if a > b
+            then GT
+        else if a < b
+            then LT
+            else EQ
+    (<)  (Card a _) (Card b _) = a < b
+    (>)  (Card a _) (Card b _) = a > b
+    (<=) (Card a _) (Card b _) = a <= b
+    (>=) (Card a _) (Card b _) = a >= b
+    max a b = if a > b then a else b
+    min a b = if a < b then a else b
 
 stringToPokerHand :: String -> PokerHand
 stringToPokerHand s = makePokerHand (a,b,c,d,e)
@@ -93,6 +95,9 @@ stringToPokerHand s = makePokerHand (a,b,c,d,e)
 data PokerHand = PokerHand {
     cards :: [Card]
 } deriving (Show, Eq)
+
+shortShow :: PokerHand -> String
+shortShow (PokerHand cards) = unwords $ map cardToString cards
 
 makePokerHand :: (Card,Card,Card,Card,Card) -> PokerHand
 makePokerHand (a,b,c,d,e) = PokerHand $ sort [a,b,c,d,e]
@@ -158,11 +163,34 @@ instance Ord PokerHand where
     compare a b = comparePhase1 a b
     (<)  a b = compare a b == LT
     (>)  a b = compare a b == GT
-    (<=) a b = compare a b `elem` [GT, EQ]
-    (>=) a b = compare a b `elem` [LT, EQ]
+    (<=) a b = compare a b /= GT
+    (>=) a b = compare a b /= LT
     max a b = if a > b then a else b
     min a b = if a < b then a else b
 
+data CompareDebug = StraightFlush
+                  | FourOfAKind
+                  | FullHouse
+                  | Flush
+                  | Straight
+                  | ThreeOfAKind
+                  | TwoPair
+                  | OnePair
+                  | HighCard
+                  deriving (Show, Enum, Bounded, Eq, Ord)
+
+getTestResults a = (faceGroups a, head readable)
+    where
+        readable = map fst (filter snd (zip [StraightFlush ..] tests))
+        tests =  map ($ a) [isStraightFlush,
+                            isFourOfAKind,
+                            isFullHouse,
+                            isFlush,
+                            isStraight,
+                            isThreeOfAKind,
+                            isTwoPair,
+                            isOnePair,
+                            isHighCard]
 -- 1 - Straight flushes
 comparePhase1 left right =
     if l || r
@@ -180,7 +208,7 @@ comparePhase2 left right =
         else comparePhase3 left right
     where
         hands = [left, right]
-        [lHand, rHand] = map faceGroups hands
+        [lHand, rHand] = map comparableGroups hands
         four = map isFourOfAKind hands
         house = map isFullHouse hands
         [l,r] = zipWith (||) four house
@@ -209,4 +237,6 @@ comparePhase4 left right =
 comparePhase5 left right = compare lHand rHand
     where
         hands = [left, right]
-        [lHand, rHand] = map faceGroups hands
+        [lHand, rHand] = map comparableGroups hands
+
+comparableGroups = unzip.faceGroups

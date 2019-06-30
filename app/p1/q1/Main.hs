@@ -10,4 +10,4 @@ main =
         fives    = sumToN $ upper `div` 5
         fifteens = sumToN $ upper `div` (lcm 3 5)
     in
-        putStrLn $ show $ 3*threes + 5*fives - (lcm 3 5)*fifteens
+        print $ 3*threes + 5*fives - (lcm 3 5)*fifteens

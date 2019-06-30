@@ -2,19 +2,23 @@ module Counting (
     factorial,
     choose,
     combinations,
+    circularPermutations,
     sumToN,
     isPerfectSquare,
     fibonacciSequence,
     triangleSequence,
+    squareSequence,
     pentagonalSequence,
     hexagonalSequence,
+    heptagonalSequence,
+    octagonalSequence,
     isTriangular,
     isPentagonal,
     isHexagonal
 ) where
 
 import Util (isqrt)
-import Data.List (tails)
+import Data.List (tails, permutations)
 
 factorial :: (Integral a)  => a -> a
 factorial n = product [1..n]
@@ -33,6 +37,10 @@ combinations 0 _  = [ [] ]
 combinations n xs = [ y:ys | y:xs' <- tails xs,
                              ys <- combinations (n-1) xs']
 
+circularPermutations:: [a] -> [[a]]
+circularPermutations [] = []
+circularPermutations (x:xs) = map (x:) $ permutations xs
+
 sumToN :: (Integral a) => a -> a
 sumToN n = n*(n+1) `div` 2
 
@@ -43,13 +51,22 @@ fibonacciSequence :: [Integer]
 fibonacciSequence = 0:1:zipWith (+) fibonacciSequence (tail fibonacciSequence)
 
 triangleSequence :: [Integer]
-triangleSequence = ngonSequenceHelper 0 1 id
+triangleSequence = ngonSequenceHelper 0 0 (\x -> x+1)
+
+squareSequence :: [Integer]
+squareSequence = ngonSequenceHelper 0 0 (\x -> 2*x+1)
 
 pentagonalSequence :: [Integer]
 pentagonalSequence = ngonSequenceHelper 0 0 (\x -> 3*x+1)
 
 hexagonalSequence :: [Integer]
 hexagonalSequence = ngonSequenceHelper 0 0 (\x -> 4*x+1)
+
+heptagonalSequence :: [Integer]
+heptagonalSequence = ngonSequenceHelper 0 0 (\x -> 5*x+1)
+
+octagonalSequence :: [Integer]
+octagonalSequence = ngonSequenceHelper 0 0 (\x -> 6*x+1)
 
 ngonSequenceHelper :: Integer -> Integer -> (Integer -> Integer) -> [Integer]
 ngonSequenceHelper count idx mapper =

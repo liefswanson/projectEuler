@@ -14,7 +14,8 @@ module Util (
     partitionBy,
     everyNth,
     rotateInteger,
-    enumerateRotations,
+    enumerateListRotations,
+    enumerateIntegralRotations,
     decimalToBinary,
     concatInts,
     isPandigital,
@@ -24,10 +25,13 @@ module Util (
     isqrt,
     sortedListDiff,
     iterativelyTake,
+    reverseIntegral,
+    withinRange,
+    asList,
 ) where
 
 import Data.Set (toList, fromList)
-import Data.List (delete, sort, tails)
+import Data.List (delete, sort, tails, splitAt)
 import Data.Char (digitToInt)
 
 splitOn :: Eq a => a -> [a] -> [[a]]
@@ -57,21 +61,32 @@ partitionBy (size:sizes) xs = grouped:partitionBy sizes remaining
 digits :: Integral a => a -> Int
 digits = length.show.toInteger
 
-digitList :: Integral a => a -> [Int]
-digitList = (map digitToInt).show.toInteger
+digitList :: Integral a => a -> [a]
+digitList = (map (fromIntegral.digitToInt)).show.toInteger
 
-digitsToInt :: [Int] -> Int
+digitsToInt :: Integral a => [a] -> a
 digitsToInt digs = sum $ zipWith (*) exps $ reverse digs
     where exps = iterate (*10) 1
 
-rotateInteger :: Integer -> Integer
+reverseIntegral :: Integral a => a -> a
+reverseIntegral = digitsToInt.reverse.digitList
+
+rotateInteger :: Integral a => a -> a
 rotateInteger n = r * 10 ^ (d-1) + q
     where d = (toInteger.digits) n
           (q, r) = n `divMod` 10
 
-enumerateRotations :: Integer -> [Integer]
-enumerateRotations n = take d $ iterate rotateInteger n
+enumerateIntegralRotations :: Integral a => a -> [a]
+enumerateIntegralRotations n = take d $ iterate rotateInteger n
     where d = digits n
+
+enumerateListRotations :: [a] -> [[a]]
+enumerateListRotations xs = map (recombineAt xs) [0..n-1]
+    where
+        recombineAt ys i = r ++ l
+            where
+                (l, r) = splitAt i ys
+        n = length xs
 
 none :: (a -> Bool) -> [a] -> Bool
 none fn = not.(any fn)
@@ -160,3 +175,12 @@ sortedListDiff (x:xs) (y:ys) = if x == y
 
 iterativelyTake :: Int -> [a] -> [[a]]
 iterativelyTake n xs = map (take n) (tails xs)
+
+withinRange :: Ord a => a -> a -> [a] -> [a]
+withinRange low high values = taken
+    where
+        dropped = dropWhile (<low) values
+        taken = takeWhile (<=high) dropped
+
+asList :: a -> [a]
+asList a = [a]
